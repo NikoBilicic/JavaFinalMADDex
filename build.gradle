@@ -4,7 +4,7 @@ buildscript{
     }
     dependencies {
         classpath "mysql:mysql-connector-java:8.0.26"
-        classpath "me.sargunvohra.lib:pokekotlin:2.4.0"
+        classpath 'com.github.oscar0812:pokeapi:2.0.0'
     }
 }
 
@@ -19,11 +19,10 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven { url "https://dl.bintray.com/sargunv/maven" }
 }
 dependencies {
-    implementation "mysql:mysql-connector-java:8.0.26"rr
-    implementation "me.sargunvohra.lib:pokekotlin:2.4.0"
+    implementation "mysql:mysql-connector-java:8.0.26"
+    implementation 'com.github.oscar0812:pokeapi:2.0.0'
 }
 
 ext {

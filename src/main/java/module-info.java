@@ -3,6 +3,7 @@ module com.example.maddexjavafinal {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.sql;
+    requires pokeapi;
 
 
     opens com.example.maddexjavafinal to javafx.fxml;
