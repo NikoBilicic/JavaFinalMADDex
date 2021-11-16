@@ -20,6 +20,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         BorderPane root = new BorderPane();
 
+
         //Build menubar
         MenuBar menu = new MenuBar();
         //Menu items

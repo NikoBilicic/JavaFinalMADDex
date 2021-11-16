@@ -4,7 +4,6 @@ buildscript{
     }
     dependencies {
         classpath "mysql:mysql-connector-java:8.0.26"
-        classpath 'com.github.oscar0812:pokeapi:2.0.0'
     }
 }
 
@@ -22,7 +21,7 @@ repositories {
 }
 dependencies {
     implementation "mysql:mysql-connector-java:8.0.26"
-    implementation 'com.github.oscar0812:pokeapi:2.0.0'
+    implementation "com.google.code.gson:gson:2.8.9"
 }
 
 ext {

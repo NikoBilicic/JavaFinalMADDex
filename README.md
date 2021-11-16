@@ -25,5 +25,8 @@ until all the required data is provided.
 ***
 
 Heavy use of PokeAPI
-Website : [pokeapi.co](pokeapi.co)
+Website : [pokeapi.co](https://pokeapi.co)
+
+Uses PokeApi V2 Java Wrapper
+Github: [PokeApi Wrapper](https://github.com/oscar0812/pokeapi-v2-java)
 

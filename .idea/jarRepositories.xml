@@ -26,5 +26,25 @@
       <option name="name" value="maven" />
       <option name="url" value="https://jitpack.io" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://github.com/oscar0812/pokeapi-v2-java" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://search.maven.org/artifact/com.github.oscar0812/pokeapi" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="file:$PROJECT_DIR$/maven.com.github.oscar0812.pokeapi" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://maven.com.github.oscar0812.pokeapi" />
+    </remote-repository>
   </component>
 </project>
