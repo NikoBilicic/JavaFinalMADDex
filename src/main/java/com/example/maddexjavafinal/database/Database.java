@@ -1,7 +1,5 @@
 package com.example.maddexjavafinal.database;
 
-import javafx.scene.chart.PieChart;
-
 import java.sql.*;
 
 public class Database {
@@ -20,13 +18,22 @@ public class Database {
                                 DBConst.DB_USER,
                                 DBConst.DB_PASS);
                 System.out.println("Created Connection");
+                //create type table
+                createTable(DBTableVals.TABLE_TYPE,
+                        DBTableVals.CREATE_TABLE_TYPE, connection);
+                //create Pokémon table
+                createTable(DBTableVals.TABLE_POKEMON,
+                        DBTableVals.CREATE_TABLE_POKEMON, connection);
+                //create many table
+                createTable(DBTableVals.TABLE_MANY,
+                        DBTableVals.CREATE_TABLE_MANY, connection);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private static Database getInstance(){
+    public static Database getInstance(){
         if (instance == null) {
             instance = new Database();
         }
@@ -46,6 +53,22 @@ public class Database {
         }
     }
 
-
+    private void createTable(String tableName, String tableQuery,
+                             Connection connection) throws SQLException {
+        Statement createTable;
+        //database info
+        DatabaseMetaData md = connection.getMetaData();
+        //search for table with tableName
+        ResultSet resultSet = md.getTables(DBConst.DB_NAME,
+                null, tableName, null);
+        //check if table exists
+        if (resultSet.next()) {
+            System.out.println(tableName + " table already exists!");
+        } else {
+            createTable = connection.createStatement();
+            createTable.execute(tableQuery);
+            System.out.println("The " + tableName + " table has been inserted.");
+        }
+    }
 
 }

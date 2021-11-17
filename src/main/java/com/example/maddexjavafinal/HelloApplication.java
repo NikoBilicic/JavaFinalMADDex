@@ -1,11 +1,18 @@
 package com.example.maddexjavafinal;
 
+import com.example.maddexjavafinal.database.Database;
+import com.example.maddexjavafinal.pojo.Poke;
 import com.example.maddexjavafinal.tabs.AddGenTableTab;
 import com.example.maddexjavafinal.tabs.AddHomeTableTab;
 import com.example.maddexjavafinal.tabs.AddStatsTab;
 import com.example.maddexjavafinal.tabs.AddTypeTableTab;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import javafx.application.Application;;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -14,10 +21,27 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+                 Database.getInstance();
+
+       // HttpURLConnection connection = (HttpURLConnection)
+       //         new URL("https://pokeapi.co/api/v2/pokemon/ditto").openConnection();
+       //
+       // if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+       //     JsonReader reader = new JsonReader(new InputStreamReader(connection.getInputStream()));
+       //
+       //     JsonElement element = JsonParser.parseReader(reader);
+       //     JsonObject object = element.getAsJsonObject();
+       //
+       //     Poke ditto = new Poke(object.getAsString());
+       // }
+       //
         BorderPane root = new BorderPane();
 
 
