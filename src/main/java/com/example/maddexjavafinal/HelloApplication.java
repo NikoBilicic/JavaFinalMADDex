@@ -1,7 +1,9 @@
 package com.example.maddexjavafinal;
 
+import com.example.maddexjavafinal.database.DBTableVals;
 import com.example.maddexjavafinal.database.Database;
 import com.example.maddexjavafinal.pojo.Poke;
+import com.example.maddexjavafinal.tables.TypeTable;
 import com.example.maddexjavafinal.tabs.AddGenTableTab;
 import com.example.maddexjavafinal.tabs.AddHomeTableTab;
 import com.example.maddexjavafinal.tabs.AddStatsTab;
@@ -28,20 +30,25 @@ import java.net.URL;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-                 Database.getInstance();
+        Database.getInstance();
 
-       // HttpURLConnection connection = (HttpURLConnection)
-       //         new URL("https://pokeapi.co/api/v2/pokemon/ditto").openConnection();
-       //
-       // if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-       //     JsonReader reader = new JsonReader(new InputStreamReader(connection.getInputStream()));
-       //
-       //     JsonElement element = JsonParser.parseReader(reader);
-       //     JsonObject object = element.getAsJsonObject();
-       //
-       //     Poke ditto = new Poke(object.getAsString());
-       // }
-       //
+        String query = "INSERT INTO " + DBTableVals.TABLE_TYPE +
+                "(" + DBTableVals.TYPE_COLUMN_TYPE + ", " +
+                "";
+
+
+        HttpURLConnection connection = (HttpURLConnection)
+                new URL("https://pokeapi.co/api/v2/pokemon/ditto").openConnection();
+
+        if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            JsonReader reader = new JsonReader(new InputStreamReader(connection.getInputStream()));
+
+            JsonElement element = JsonParser.parseReader(reader);
+            JsonObject object = element.getAsJsonObject();
+
+            //Poke ditto = new Poke(object.get("name"));
+        }
+
         BorderPane root = new BorderPane();
 
 
