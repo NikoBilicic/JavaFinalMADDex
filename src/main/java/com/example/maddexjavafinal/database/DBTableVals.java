@@ -45,4 +45,14 @@ public class DBTableVals {
             "FOREIGN KEY (" + MANY_COLUMN_TYPE + ")" +
                          "REFERENCES " + TABLE_TYPE + "(" + TYPE_COLUMN_ID + "));";
 
+    //TABLE FILL statements
+    public static String[] typing = {"normal", "fighting", "flying", "poison", "ground", "rock", "bug",
+            "ghost", "steel", "fire", "water", "grass", "electric", "psychic",
+            "ice", "dragon", "dark", "fairy"};
+
+    public static final String TABLE_TYPE_POPULATE = "INSERT INTO " + TABLE_TYPE + " VALUES " +
+            "(normal, fighting, flying, poison, ground, rock, bug, " +
+            "ghost, steel, fire, water, grass, electric, psychic, " +
+            "ice, dragon, dark, fairy";
+
 }

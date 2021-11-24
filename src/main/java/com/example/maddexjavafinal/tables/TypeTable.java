@@ -14,12 +14,6 @@ public class TypeTable implements TypeDAO {
     Database db = Database.getInstance();
     ArrayList<Type> types;
 
-    public String[] typing = {"normal", "fighting", "flying", "poison", "ground", "rock", "bug",
-                        "ghost", "steel", "fire", "water", "grass", "electric", "psychic",
-                        "ice", "dragon", "dark", "fairy"};
-
-
-
     @Override
     public ArrayList<Type> getAllType() {
         String query = "SELECT * FROM " + DBTableVals.TABLE_TYPE;
