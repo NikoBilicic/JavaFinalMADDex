@@ -2,7 +2,7 @@ package com.example.maddexjavafinal.database;
 
 import java.sql.*;
 
-import static com.example.maddexjavafinal.database.DBTableVals.typing;
+import static com.example.maddexjavafinal.database.DBTableVals.*;
 
 public class Database {
 
@@ -29,6 +29,10 @@ public class Database {
                 //create many table
                 createTable(DBTableVals.TABLE_MANY,
                         DBTableVals.CREATE_TABLE_MANY, connection);
+                //create many table relationships
+                Statement relationships = connection.createStatement();
+                relationships.execute(CREATE_RELATIONSHIPS);
+                relationships.execute(CREATE_RELATIONSHIPS2);
                 //populate type table
                 populateType(DBTableVals.TABLE_TYPE,
                         DBTableVals.TABLE_TYPE_POPULATE, connection);
@@ -95,7 +99,7 @@ public class Database {
            }
            System.out.printf("The " + tableName + " table has been populated.");
        } else {
-           System.out.println("table" + tableName + " is already populated.");
+           System.out.println("Table " + tableName + " is already populated.");
        }
     }
 

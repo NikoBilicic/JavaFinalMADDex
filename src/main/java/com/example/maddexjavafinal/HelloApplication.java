@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
 
         //Build Pokémon
         HttpURLConnection connection = (HttpURLConnection)
-                new URL("https://pokeapi.co/api/v2/pokemon/ditto").openConnection();
+                new URL("https://pokeapi.co/api/v2/pokemon/muk").openConnection();
         int dexNum = 0;
         int gen = 0;
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {

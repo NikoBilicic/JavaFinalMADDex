@@ -7,7 +7,7 @@ public class DBTableVals {
     public static final String POKEMON_COLUMN_ID = "dex_num";
     public static final String POKEMON_COLUMN_SPRITE = "sprite";
     public static final String POKEMON_COLUMN_NAME = "name";
-    public static final String POKEMON_COLUMN_TYPE = "type";
+    public static final String POKEMON_COLUMN_TYPE = "poke_type";
     public static final String POKEMON_COLUMN_GEN = "generation";
 
     //type TABLE
@@ -16,8 +16,8 @@ public class DBTableVals {
     public static final String TYPE_COLUMN_TYPE = "type";
 
     //many-to-many-type TABLE
-    public static final String TABLE_MANY = "MANY";
-    public static final String MANY_COLUMN_POKEMON = "pokemon";
+    public static final String TABLE_MANY = "POKEMON_TYPE";
+    public static final String MANY_COLUMN_POKEMON = "dex_num";
     public static final String MANY_COLUMN_TYPE = "type";
 
     //TABLE CREATE statements
@@ -39,11 +39,12 @@ public class DBTableVals {
 
     public static final String CREATE_TABLE_MANY = "CREATE TABLE " + TABLE_MANY + " (" +
             MANY_COLUMN_POKEMON + " int NOT NULL, " +
-            MANY_COLUMN_TYPE + " int NOT NULL, " +
-            "FOREIGN KEY (" + MANY_COLUMN_POKEMON + ")" +
-                         "REFERENCES " + TABLE_POKEMON + "(" + POKEMON_COLUMN_ID + ")," +
-            "FOREIGN KEY (" + MANY_COLUMN_TYPE + ")" +
-                         "REFERENCES " + TABLE_TYPE + "(" + TYPE_COLUMN_ID + "));";
+            MANY_COLUMN_TYPE + " int NOT NULL);";
+
+    //linking statement SELECT * FROM POKEMON, TYPE, MANY WHERE POKEMON.dex_num = MANY.dex_num AND TYPE.id = MANY.type;
+
+    public static final String CREATE_RELATIONSHIPS = "ALTER table " + TABLE_MANY + " ADD FOREIGN KEY (" + MANY_COLUMN_POKEMON + ") REFERENCES " + TABLE_POKEMON + "(" + POKEMON_COLUMN_ID + ");";
+    public static final String CREATE_RELATIONSHIPS2 = "ALTER table " + TABLE_MANY + " ADD FOREIGN KEY (" + MANY_COLUMN_TYPE + ") REFERENCES  " + TABLE_TYPE + "(" + TYPE_COLUMN_ID + ");";
 
     //TABLE FILL statements
     public static String[] typing = {"normal", "fighting", "flying", "poison", "ground", "rock", "bug",
