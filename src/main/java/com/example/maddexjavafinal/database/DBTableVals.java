@@ -3,7 +3,7 @@ package com.example.maddexjavafinal.database;
 public class DBTableVals {
 
     //Pokémon TABLE
-    public static final String TABLE_POKEMON = "pokemon";
+    public static final String TABLE_POKEMON = "POKEMON";
     public static final String POKEMON_COLUMN_ID = "dex_num";
     public static final String POKEMON_COLUMN_SPRITE = "sprite";
     public static final String POKEMON_COLUMN_NAME = "name";
@@ -11,12 +11,12 @@ public class DBTableVals {
     public static final String POKEMON_COLUMN_GEN = "generation";
 
     //type TABLE
-    public static final String TABLE_TYPE = "type";
+    public static final String TABLE_TYPE = "TYPE";
     public static final String TYPE_COLUMN_ID = "id";
     public static final String TYPE_COLUMN_TYPE = "type";
 
     //many-to-many-type TABLE
-    public static final String TABLE_MANY = "many";
+    public static final String TABLE_MANY = "MANY";
     public static final String MANY_COLUMN_POKEMON = "pokemon";
     public static final String MANY_COLUMN_TYPE = "type";
 
@@ -50,9 +50,6 @@ public class DBTableVals {
             "ghost", "steel", "fire", "water", "grass", "electric", "psychic",
             "ice", "dragon", "dark", "fairy"};
 
-    public static final String TABLE_TYPE_POPULATE = "INSERT INTO " + TABLE_TYPE + " VALUES " +
-            "(normal, fighting, flying, poison, ground, rock, bug, " +
-            "ghost, steel, fire, water, grass, electric, psychic, " +
-            "ice, dragon, dark, fairy";
+    public static final String TABLE_TYPE_POPULATE = "INSERT INTO " + TABLE_TYPE + " (type) VALUES ";
 
 }

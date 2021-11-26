@@ -2,6 +2,8 @@ package com.example.maddexjavafinal.database;
 
 import java.sql.*;
 
+import static com.example.maddexjavafinal.database.DBTableVals.typing;
+
 public class Database {
 
     private static Database instance;
@@ -28,8 +30,8 @@ public class Database {
                 createTable(DBTableVals.TABLE_MANY,
                         DBTableVals.CREATE_TABLE_MANY, connection);
                 //populate type table
-                //populateType(DBTableVals.TABLE_TYPE,
-                //        DBTableVals.TABLE_TYPE_POPULATE, connection);
+                populateType(DBTableVals.TABLE_TYPE,
+                        DBTableVals.TABLE_TYPE_POPULATE, connection);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -74,25 +76,27 @@ public class Database {
         }
     }
 
-    //private void populateType(String tableName, String tableQuery,
-    //                          Connection connection) throws SQLException {
-    //    Statement fillTable;
-    //    Statement countCheck = connection.createStatement();
-    //
-    //    DatabaseMetaData md = connection.getMetaData();
-    //
-    //    String checkCount = "SELECT COUNT(*) from " + DBTableVals.TABLE_TYPE;
-    //    ResultSet resultSet = countCheck.executeQuery(checkCount);
-    //    resultSet.next();
-    //    int count = resultSet.getInt(1);
-    //
-    //    if (count != 18) {
-    //        fillTable = connection.createStatement();
-    //        fillTable.execute(tableQuery);
-    //        System.out.printf("The " + tableName + " has been populated.");
-    //    } else {
-    //        System.out.println(tableName + " is already populated.");
-    //    }
-    //}
+    private void populateType(String tableName, String tableQuery,
+                              Connection connection) throws SQLException {
+        Statement fillTable;
+        Statement countCheck = connection.createStatement();
+
+        DatabaseMetaData md = connection.getMetaData();
+
+        String checkCount = "SELECT COUNT(*) from " + DBTableVals.TABLE_TYPE;
+        ResultSet resultSet = countCheck.executeQuery(checkCount);
+        resultSet.next();
+        int count = resultSet.getInt(1);
+
+       if (count < 18) {
+           fillTable = connection.createStatement();
+           for (int i = 0; i <= 17; i++) {
+               fillTable.execute(tableQuery + "('" + typing[i] + "');");
+           }
+           System.out.printf("The " + tableName + " table has been populated.");
+       } else {
+           System.out.println("table" + tableName + " is already populated.");
+       }
+    }
 
 }
