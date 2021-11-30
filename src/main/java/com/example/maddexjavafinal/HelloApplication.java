@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
 
         //Build Pokémon
         HttpURLConnection connection = (HttpURLConnection)
-                new URL("https://pokeapi.co/api/v2/pokemon/muk").openConnection();
+                new URL("https://pokeapi.co/api/v2/pokemon/pikachu").openConnection();
         int dexNum = 0;
         int gen = 0;
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -54,6 +54,8 @@ public class HelloApplication extends Application {
             System.out.println(getPokeTyping(object));
             //Generation
             System.out.println(getPokeGen(getDexNum(object)));
+            //Sprite
+            System.out.println(getPokeSprite(object, "F", "Y"));
             //object
             Poke poke = new Poke(getDexNum(object), "Sprite", getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
             System.out.println(poke);

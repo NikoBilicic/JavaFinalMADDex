@@ -5,6 +5,26 @@ import com.google.gson.JsonObject;
 
 public class GsonFunc {
 
+    //function to get pokemon sprite
+    public static String getPokeSprite(JsonObject object, String gender, String shiny) {
+        String pokeSprite = "";
+        JsonObject allSprites = object.getAsJsonObject("sprites");
+        if (gender == "M" && shiny == "N") {
+            String sprite = String.valueOf(allSprites.get("front_default"));
+            return String.valueOf(sprite);
+        } else if (gender == "M" && shiny == "Y") {
+            String sprite = String.valueOf(allSprites.get("front_shiny"));
+            return String.valueOf(sprite);
+        } else if (gender == "F" && shiny == "N") {
+            String sprite = String.valueOf(allSprites.get("front_female"));
+            return String.valueOf(sprite);
+        } else if (gender == "F" && shiny == "Y") {
+            String sprite = String.valueOf(allSprites.get("front_shiny_female"));
+            return String.valueOf(sprite);
+        }
+        return null;
+    }
+
     //Function to get pokemon name
     public static String getPokeName(JsonObject object) {
         String pokeName = "";
@@ -19,6 +39,7 @@ public class GsonFunc {
         return dexNum;
     }
 
+    //function to get pokemon types
     public static String getPokeTyping(JsonObject object) {
         JsonArray types = object.getAsJsonArray("types");
         if (types.size() > 1) {
@@ -37,6 +58,7 @@ public class GsonFunc {
         }
     }
 
+    //function to get pokemon generation
     public static Integer getPokeGen(int dexNum) {
         if (dexNum >= 1 && dexNum <= 151) {
             return 1;

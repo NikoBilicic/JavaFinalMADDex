@@ -41,7 +41,8 @@ public class DBTableVals {
             MANY_COLUMN_POKEMON + " int NOT NULL, " +
             MANY_COLUMN_TYPE + " int NOT NULL);";
 
-    //linking statement SELECT * FROM POKEMON, TYPE, MANY WHERE POKEMON.dex_num = MANY.dex_num AND TYPE.id = MANY.type;
+    //linking statement that displays proper table info
+    // SELECT POKEMON.dex_num, POKEMON.sprite, POKEMON.name, TYPE.type, POKEMON.generation FROM POKEMON, TYPE, POKEMON_TYPE WHERE POKEMON.dex_num = POKEMON_TYPE.dex_num AND TYPE.id = POKEMON_TYPE.type;
 
     public static final String CREATE_RELATIONSHIPS = "ALTER table " + TABLE_MANY + " ADD FOREIGN KEY (" + MANY_COLUMN_POKEMON + ") REFERENCES " + TABLE_POKEMON + "(" + POKEMON_COLUMN_ID + ");";
     public static final String CREATE_RELATIONSHIPS2 = "ALTER table " + TABLE_MANY + " ADD FOREIGN KEY (" + MANY_COLUMN_TYPE + ") REFERENCES  " + TABLE_TYPE + "(" + TYPE_COLUMN_ID + ");";
