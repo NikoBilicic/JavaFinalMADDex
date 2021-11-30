@@ -3,6 +3,10 @@ package com.example.maddexjavafinal;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.Arrays;
+
+import static com.example.maddexjavafinal.database.DBTableVals.typing;
+
 public class GsonFunc {
 
     //function to get pokemon sprite
@@ -29,7 +33,7 @@ public class GsonFunc {
     public static String getPokeName(JsonObject object) {
         String pokeName = "";
         pokeName = String.valueOf(object.get("name"));
-        return pokeName;
+        return pokeName.replaceAll("\"", "");
     }
 
     //Function to get pokemon Dex num
@@ -40,7 +44,7 @@ public class GsonFunc {
     }
 
     //function to get pokemon types
-    public static String getPokeTyping(JsonObject object) {
+    public static int getPokeTyping(JsonObject object) {
         JsonArray types = object.getAsJsonArray("types");
         if (types.size() > 1) {
             JsonObject type1 = (JsonObject) types.get(0);
@@ -49,13 +53,24 @@ public class GsonFunc {
             JsonObject type2 = (JsonObject) types.get(1);
             JsonObject type2Type = type2.getAsJsonObject("type");
             String[] pokeTypes = {String.valueOf(type1Type.get("name")), String.valueOf(type2Type.get("name"))};
-            return pokeTypes.toString();
+            for (int i = 0; i <= 17; i++) {
+                if (pokeTypes[0].replaceAll("\"", "").equalsIgnoreCase(typing[i])) {
+                    System.out.println(typing[i]);
+                    return i + 1;
+                }
+            }
         } else {
             JsonObject type1 = (JsonObject) types.get(0);
             JsonObject type1Type = type1.getAsJsonObject("type");
             String pokeTypes = String.valueOf(type1Type.get("name"));
-            return pokeTypes;
+            for (int i = 0; i <= 17; i++) {
+                if (pokeTypes.replaceAll("\"", "").equalsIgnoreCase(typing[i])) {
+                    System.out.println(typing[i]);
+                    return i + 1;
+                }
+            }
         }
+        return 0;
     }
 
     //function to get pokemon generation

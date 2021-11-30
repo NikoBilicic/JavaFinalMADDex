@@ -4,10 +4,10 @@ public class Poke {
     private int id;
     private String sprite;
     private String name;
-    private String type;
+    private int type;
     private int gen;
 
-    public Poke(int id, String sprite, String name, String type, int gen) {
+    public Poke(int id, String sprite, String name, int  type, int gen) {
         this.id = id;
         this.sprite = sprite;
         this.name = name;
@@ -15,7 +15,7 @@ public class Poke {
         this.gen = gen;
     }
 
-    public Poke(String sprite, String name, String type, int gen) {
+    public Poke(String sprite, String name, int type, int gen) {
         this.sprite = sprite;
         this.name = name;
         this.type = type;
@@ -57,11 +57,11 @@ public class Poke {
         this.name = name;
     }
 
-    public String  getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 

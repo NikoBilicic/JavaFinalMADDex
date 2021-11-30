@@ -25,12 +25,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
 
 import static com.example.maddexjavafinal.GsonFunc.*;
+import static com.example.maddexjavafinal.database.Database.insertPokemon;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
         Database.getInstance();
 
         String query = "INSERT INTO " + DBTableVals.TABLE_TYPE +
@@ -39,7 +42,7 @@ public class HelloApplication extends Application {
 
         //Build Pokémon
         HttpURLConnection connection = (HttpURLConnection)
-                new URL("https://pokeapi.co/api/v2/pokemon/pikachu").openConnection();
+                new URL("https://pokeapi.co/api/v2/pokemon/ditto").openConnection();
         int dexNum = 0;
         int gen = 0;
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -55,10 +58,16 @@ public class HelloApplication extends Application {
             //Generation
             System.out.println(getPokeGen(getDexNum(object)));
             //Sprite
-            System.out.println(getPokeSprite(object, "F", "Y"));
+            System.out.println(getPokeSprite(object, "M", "Y"));
             //object
-            Poke poke = new Poke(getDexNum(object), "Sprite", getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
+            Poke poke = new Poke(getDexNum(object), getPokeSprite(object, "M", "Y"), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
             System.out.println(poke);
+
+           // try {
+           //     insertPokemon(poke);
+           // } catch (SQLException e) {
+           //     e.printStackTrace();
+           // }
         }
 
 

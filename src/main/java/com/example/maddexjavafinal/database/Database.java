@@ -1,5 +1,7 @@
 package com.example.maddexjavafinal.database;
 
+import com.example.maddexjavafinal.pojo.Poke;
+
 import java.sql.*;
 
 import static com.example.maddexjavafinal.database.DBTableVals.*;
@@ -7,7 +9,7 @@ import static com.example.maddexjavafinal.database.DBTableVals.*;
 public class Database {
 
     private static Database instance;
-    private Connection connection = null;
+    private static Connection connection = null;
 
     private Database(){
         //Database Connection
@@ -85,8 +87,6 @@ public class Database {
         Statement fillTable;
         Statement countCheck = connection.createStatement();
 
-        DatabaseMetaData md = connection.getMetaData();
-
         String checkCount = "SELECT COUNT(*) from " + DBTableVals.TABLE_TYPE;
         ResultSet resultSet = countCheck.executeQuery(checkCount);
         resultSet.next();
@@ -97,10 +97,28 @@ public class Database {
            for (int i = 0; i <= 17; i++) {
                fillTable.execute(tableQuery + "('" + typing[i] + "');");
            }
-           System.out.printf("The " + tableName + " table has been populated.");
+           System.out.println("The " + tableName + " table has been populated.");
        } else {
            System.out.println("Table " + tableName + " is already populated.");
        }
+    }
+
+    public static void insertPokemon(Poke pokemon) throws SQLException{
+        Statement insert;
+        Statement many;
+
+        String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
+                " `poke_type`, `generation`) VALUES (" + pokemon.getId() + ", '" + pokemon.getSprite() +
+                "', '" + pokemon.getName() + "', " + pokemon.getType() + ", " + pokemon.getGen() +")";
+        insert = connection.createStatement();
+        insert.execute(insertStatement);
+        System.out.println("The pokemon " + pokemon.getName() + " has been added to the database.");
+
+        String manyInsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
+                pokemon.getId() + ", " + pokemon.getType() + ")";
+        many = connection.createStatement();
+        many.execute(manyInsertStatement);
+        System.out.println("The POKEMON_TYPE table was updated.");
     }
 
 }
