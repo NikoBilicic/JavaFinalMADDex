@@ -42,7 +42,7 @@ public class HelloApplication extends Application {
 
         //Build Pokémon
         HttpURLConnection connection = (HttpURLConnection)
-                new URL("https://pokeapi.co/api/v2/pokemon/ditto").openConnection();
+                new URL("https://pokeapi.co/api/v2/pokemon/bulbasaur").openConnection();
         int dexNum = 0;
         int gen = 0;
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -58,16 +58,16 @@ public class HelloApplication extends Application {
             //Generation
             System.out.println(getPokeGen(getDexNum(object)));
             //Sprite
-            System.out.println(getPokeSprite(object, "M", "Y"));
+            System.out.println(getPokeSprite(object, "F", "Y"));
             //object
             Poke poke = new Poke(getDexNum(object), getPokeSprite(object, "M", "Y"), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
             System.out.println(poke);
 
-           // try {
-           //     insertPokemon(poke);
-           // } catch (SQLException e) {
-           //     e.printStackTrace();
-           // }
+            try {
+                insertPokemon(poke);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
 

@@ -9,22 +9,51 @@ import static com.example.maddexjavafinal.database.DBTableVals.typing;
 
 public class GsonFunc {
 
+    /**
+     * Pokemon with form issues
+     * Deoxys = default:deoxys-normal, deoxys-attack, deoxys-defense, deoxys-speed
+     * @Wormadam = wormadam-plant, wormadam-sandy, wormadam-trash
+     * Giratina = default:giratina-altered, giratina-origin
+     * Shaymin = default:shaymin-land, shaymin-sky
+     * @Basculin = basculin-red-striped, basculin-blue-stripe
+     * Darmanitan = default:darmanitan-standard, darmanitan-zen
+     * Tornadus = default:tornadus-incarnate, tornadus-therian
+     * Thundurus = default:thundurus-incarnate, thundurus-therian
+     * Landorus = default:landorus-incarnate, landorus-therian
+     * Keldeo = default:keldeo-ordinary, keldeo-resolute
+     * Meloetta = default:meloetta-aria, meloetta-pirouette
+     * Aegislash = default:aegislash-shield, aegislash-blade
+     * Pumpkaboo = pumpkaboo-small, default:pumpkaboo-average, pumpkaboo-large, pumpkaboo-super
+     * Gourgeist = gourgeist-small, default:gourgeist-average, gourgeist-large, gourgeist-super
+     * @Oricorio = oricorio-baile, oricorio-pom-pom, oricorio-pau, oricorio-sensu
+     * @Lycanroc = lycanroc-midday, lycanroc-dusk, lycanroc-midnight
+     * WishiWashi = default:whishiwashi-solo, wishiwashi-school
+     * Minior = minior-red-meteor
+     * Mimikyu = default:mimikyu-disguise, mimikyu-busted
+     * @Toxtricity = toxtricity-amped, toxtricity-low-key
+     * Eiscue = default:eiscue-ice, eiscue-noice
+     * Zacian = default:zacian-hero, zacian-crowned
+     * Zamazenta = default:zamazenta-hero, zamazenta-crowned
+     * @Urshifue = urshifu-single-strike, urshifu-rapid-strike
+     * @Nidoran = nidoran-m, nidoran-f
+     */
+
     //function to get pokemon sprite
     public static String getPokeSprite(JsonObject object, String gender, String shiny) {
         String pokeSprite = "";
         JsonObject allSprites = object.getAsJsonObject("sprites");
         if (gender == "M" && shiny == "N") {
             String sprite = String.valueOf(allSprites.get("front_default"));
-            return String.valueOf(sprite);
+            return String.valueOf(sprite).replaceAll("\"", "");
         } else if (gender == "M" && shiny == "Y") {
             String sprite = String.valueOf(allSprites.get("front_shiny"));
-            return String.valueOf(sprite);
+            return String.valueOf(sprite).replaceAll("\"", "");
         } else if (gender == "F" && shiny == "N") {
             String sprite = String.valueOf(allSprites.get("front_female"));
-            return String.valueOf(sprite);
+            return String.valueOf(sprite).replaceAll("\"", "");
         } else if (gender == "F" && shiny == "Y") {
             String sprite = String.valueOf(allSprites.get("front_shiny_female"));
-            return String.valueOf(sprite);
+            return String.valueOf(sprite).replaceAll("\"", "");
         }
         return null;
     }
