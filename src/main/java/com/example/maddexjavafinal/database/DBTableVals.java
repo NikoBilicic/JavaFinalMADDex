@@ -8,6 +8,7 @@ public class DBTableVals {
     public static final String POKEMON_COLUMN_SPRITE = "sprite";
     public static final String POKEMON_COLUMN_NAME = "name";
     public static final String POKEMON_COLUMN_TYPE = "poke_type";
+    public static final String POKEMON_COLUMN_TYPE2 = "poke_type2";
     public static final String POKEMON_COLUMN_GEN = "generation";
 
     //type TABLE
@@ -35,6 +36,7 @@ public class DBTableVals {
             POKEMON_COLUMN_SPRITE + " VARCHAR(255) NOT NULL, " +
             POKEMON_COLUMN_NAME + " VARCHAR(25) NOT NULL, " +
             POKEMON_COLUMN_TYPE + " int NOT NULL, " +
+            POKEMON_COLUMN_TYPE2 + " int, " +
             POKEMON_COLUMN_GEN + " int(2) NOT NULL );";
 
     public static final String CREATE_TABLE_MANY = "CREATE TABLE " + TABLE_MANY + " (" +

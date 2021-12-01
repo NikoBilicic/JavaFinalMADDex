@@ -3,7 +3,7 @@ package com.example.maddexjavafinal;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import static com.example.maddexjavafinal.database.DBTableVals.typing;
 
@@ -73,8 +73,9 @@ public class GsonFunc {
     }
 
     //function to get pokemon types
-    public static int getPokeTyping(JsonObject object) {
+    public static ArrayList<Integer> getPokeTyping(JsonObject object) {
         JsonArray types = object.getAsJsonArray("types");
+        ArrayList<Integer> typesArray = new ArrayList<>();
         if (types.size() > 1) {
             JsonObject type1 = (JsonObject) types.get(0);
             JsonObject type1Type = type1.getAsJsonObject("type");
@@ -84,10 +85,18 @@ public class GsonFunc {
             String[] pokeTypes = {String.valueOf(type1Type.get("name")), String.valueOf(type2Type.get("name"))};
             for (int i = 0; i <= 17; i++) {
                 if (pokeTypes[0].replaceAll("\"", "").equalsIgnoreCase(typing[i])) {
-                    System.out.println(typing[i]);
-                    return i + 1;
+                    int type1int = i + 1;
+                    typesArray.add(type1int);
                 }
             }
+            for (int i = 0; i <= 17; i++) {
+                if (pokeTypes[1].replaceAll("\"", "").equalsIgnoreCase(typing[i])) {
+                    int type2int = i + 1;
+                    typesArray.add(type2int);
+                }
+            }
+            System.out.println(typesArray);
+            return typesArray;
         } else {
             JsonObject type1 = (JsonObject) types.get(0);
             JsonObject type1Type = type1.getAsJsonObject("type");
@@ -95,11 +104,11 @@ public class GsonFunc {
             for (int i = 0; i <= 17; i++) {
                 if (pokeTypes.replaceAll("\"", "").equalsIgnoreCase(typing[i])) {
                     System.out.println(typing[i]);
-                    return i + 1;
+                    typesArray.add(i + 1);
                 }
             }
         }
-        return 0;
+        return typesArray;
     }
 
     //function to get pokemon generation
