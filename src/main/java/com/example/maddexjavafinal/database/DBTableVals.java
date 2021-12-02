@@ -41,13 +41,19 @@ public class DBTableVals {
 
     public static final String CREATE_TABLE_MANY = "CREATE TABLE " + TABLE_MANY + " (" +
             MANY_COLUMN_POKEMON + " int NOT NULL, " +
-            MANY_COLUMN_TYPE + " int NOT NULL);";
+            MANY_COLUMN_TYPE + " int NOT NULL, " +
+            "FOREIGN KEY (" + MANY_COLUMN_POKEMON + ") REFERENCES " + TABLE_POKEMON + "("
+            + POKEMON_COLUMN_ID + "), FOREIGN KEY (" + MANY_COLUMN_TYPE + ") REFERENCES " +
+            TABLE_TYPE + "(" +TYPE_COLUMN_ID + "), PRIMARY KEY (" + MANY_COLUMN_POKEMON + ", " +
+            MANY_COLUMN_TYPE + "));";
 
     //linking statement that displays proper table info
     // SELECT POKEMON.dex_num, POKEMON.sprite, POKEMON.name, TYPE.type, POKEMON.generation FROM POKEMON, TYPE, POKEMON_TYPE WHERE POKEMON.dex_num = POKEMON_TYPE.dex_num AND TYPE.id = POKEMON_TYPE.type;
 
-    public static final String CREATE_RELATIONSHIPS = "ALTER table " + TABLE_MANY + " ADD FOREIGN KEY (" + MANY_COLUMN_POKEMON + ") REFERENCES " + TABLE_POKEMON + "(" + POKEMON_COLUMN_ID + ");";
-    public static final String CREATE_RELATIONSHIPS2 = "ALTER table " + TABLE_MANY + " ADD FOREIGN KEY (" + MANY_COLUMN_TYPE + ") REFERENCES  " + TABLE_TYPE + "(" + TYPE_COLUMN_ID + ");";
+    //SELECT POKEMON.dex_num, POKEMON.sprite, POKEMON.name, POKEMON.generation, TYPE.type AS TypeName
+    //FROM POKEMON
+    //INNER JOIN TYPE
+    //ON POKEMON.poke_type = TYPE.id;
 
     //TABLE FILL statements
     public static String[] typing = {"normal", "fighting", "flying", "poison", "ground", "rock", "bug",

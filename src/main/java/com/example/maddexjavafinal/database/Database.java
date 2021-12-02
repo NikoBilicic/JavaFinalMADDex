@@ -32,10 +32,6 @@ public class Database {
                 //create many table
                 createTable(DBTableVals.TABLE_MANY,
                         DBTableVals.CREATE_TABLE_MANY, connection);
-                //create many table relationships
-                Statement relationships = connection.createStatement();
-                relationships.execute(CREATE_RELATIONSHIPS);
-                relationships.execute(CREATE_RELATIONSHIPS2);
                 //populate type table
                 populateType(DBTableVals.TABLE_TYPE,
                         DBTableVals.TABLE_TYPE_POPULATE, connection);
