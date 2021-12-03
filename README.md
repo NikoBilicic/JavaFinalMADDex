@@ -25,5 +25,7 @@ until all the required data is provided.
 ***
 
 Heavy use of PokeAPI
-Website : [pokeapi.co](pokeapi.co)
+Website : [pokeapi.co](https://pokeapi.co)
 
+Uses Gson
+Github: [Gson](https://github.com/google/gson)
