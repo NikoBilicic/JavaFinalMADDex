@@ -63,11 +63,11 @@ public class HelloApplication extends Application {
             Poke poke = new Poke(getDexNum(object), getPokeSprite(object, "M", "Y"), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
             System.out.println(poke);
 
-           try {
-               insertPokemon(poke);
-           } catch (SQLException e) {
-               e.printStackTrace();
-           }
+          try {
+              insertPokemon(poke);
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
         }
 
 

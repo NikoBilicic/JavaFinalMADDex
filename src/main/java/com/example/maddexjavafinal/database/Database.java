@@ -108,9 +108,8 @@ public class Database {
         if (pokemon.getType().size() > 1) {
 
             String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
-                    " `poke_type`, `poke_type2`, `generation`) VALUES (" + pokemon.getId() + ", '" +
+                    " `generation`) VALUES (" + pokemon.getId() + ", '" +
                     pokemon.getSprite() + "', '" + pokemon.getName() + "', " +
-                    pokemon.getType().get(0) + ", " + pokemon.getType().get(1) + ", " +
                     pokemon.getGen() +")";
             insert = connection.createStatement();
             insert.execute(insertStatement);
@@ -125,21 +124,22 @@ public class Database {
                     pokemon.getId() + ", " + pokemon.getType().get(1) + ")";
             many2 = connection.createStatement();
             many2.execute(many2InsertStatement);
+        } else {
+
+            String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
+                    " `generation`) VALUES (" + pokemon.getId() + ", '" + pokemon.getSprite() +
+                    "', '" + pokemon.getName() + "', " + pokemon.getGen() + ")";
+            insert = connection.createStatement();
+            insert.execute(insertStatement);
+            System.out.println("The pokemon " + pokemon.getName() + " has been added to the database.");
+
+            String manyInsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
+                    pokemon.getId() + ", " + pokemon.getType().get(0) + ")";
+            many = connection.createStatement();
+            many.execute(manyInsertStatement);
+
+            System.out.println("The POKEMON_TYPE table was updated.");
         }
-
-        String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
-                " `poke_type`, `generation`) VALUES (" + pokemon.getId() + ", '" + pokemon.getSprite() +
-                "', '" + pokemon.getName() + "', " + pokemon.getType().get(0) + ", " + pokemon.getGen() +")";
-        insert = connection.createStatement();
-        insert.execute(insertStatement);
-        System.out.println("The pokemon " + pokemon.getName() + " has been added to the database.");
-
-        String manyInsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
-                pokemon.getId() + ", " + pokemon.getType().get(0) + ")";
-        many = connection.createStatement();
-        many.execute(manyInsertStatement);
-
-        System.out.println("The POKEMON_TYPE table was updated.");
     }
 
 }

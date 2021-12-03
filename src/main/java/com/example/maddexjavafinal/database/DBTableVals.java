@@ -35,8 +35,6 @@ public class DBTableVals {
             POKEMON_COLUMN_ID + " int NOT NULL PRIMARY KEY, " +
             POKEMON_COLUMN_SPRITE + " VARCHAR(255) NOT NULL, " +
             POKEMON_COLUMN_NAME + " VARCHAR(25) NOT NULL, " +
-            POKEMON_COLUMN_TYPE + " int NOT NULL, " +
-            POKEMON_COLUMN_TYPE2 + " int, " +
             POKEMON_COLUMN_GEN + " int(2) NOT NULL );";
 
     public static final String CREATE_TABLE_MANY = "CREATE TABLE " + TABLE_MANY + " (" +
