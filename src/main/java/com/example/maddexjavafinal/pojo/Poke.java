@@ -17,12 +17,21 @@ public class Poke {
         this.gen = gen;
     }
 
+    public Poke(int id, String sprite, String name, int gen) {
+        this.id = id;
+        this.sprite = sprite;
+        this.name = name;
+        this.gen = gen;
+    }
+
     public Poke(String sprite, String name, ArrayList type, int gen) {
         this.sprite = sprite;
         this.name = name;
         this.type = type;
         this.gen = gen;
     }
+
+
 
     @Override
     public String toString() {

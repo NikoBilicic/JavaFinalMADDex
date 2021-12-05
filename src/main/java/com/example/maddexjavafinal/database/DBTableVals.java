@@ -7,8 +7,6 @@ public class DBTableVals {
     public static final String POKEMON_COLUMN_ID = "dex_num";
     public static final String POKEMON_COLUMN_SPRITE = "sprite";
     public static final String POKEMON_COLUMN_NAME = "name";
-    public static final String POKEMON_COLUMN_TYPE = "poke_type";
-    public static final String POKEMON_COLUMN_TYPE2 = "poke_type2";
     public static final String POKEMON_COLUMN_GEN = "generation";
 
     //type TABLE
@@ -47,6 +45,7 @@ public class DBTableVals {
 
     //linking statement that displays proper table info
     // SELECT POKEMON.dex_num, POKEMON.sprite, POKEMON.name, TYPE.type, POKEMON.generation FROM POKEMON, TYPE, POKEMON_TYPE WHERE POKEMON.dex_num = POKEMON_TYPE.dex_num AND TYPE.id = POKEMON_TYPE.type;
+
 
     //SELECT POKEMON.dex_num, POKEMON.sprite, POKEMON.name, POKEMON.generation, TYPE.type AS TypeName
     //FROM POKEMON

@@ -8,6 +8,5 @@ public interface PokeDAO {
     public void createPoke(Poke poke);
     public ArrayList<Poke> getAllPoke();
     public Poke getPoke(int id);
-    public void updatePoke(Poke poke);
     public void deletePoke(Poke poke);
 }

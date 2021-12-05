@@ -49,25 +49,15 @@ public class HelloApplication extends Application {
             JsonReader reader = new JsonReader(new InputStreamReader(connection.getInputStream()));
             JsonElement element = JsonParser.parseReader(reader);
             JsonObject object = element.getAsJsonObject();
-            //name
-            System.out.println(getPokeName(object));
-            //dex number
-            System.out.println(getDexNum(object));
-            //types
-            System.out.println(getPokeTyping(object));
-            //Generation
-            System.out.println(getPokeGen(getDexNum(object)));
-            //Sprite
-            System.out.println(getPokeSprite(object, "F", "Y"));
             //object
             Poke poke = new Poke(getDexNum(object), getPokeSprite(object, "M", "Y"), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
             System.out.println(poke);
 
-          try {
-              insertPokemon(poke);
-          } catch (SQLException e) {
-              e.printStackTrace();
-          }
+          //try {
+          //    insertPokemon(poke);
+          //} catch (SQLException e) {
+          //    e.printStackTrace();
+          //}
         }
 
 
