@@ -6,11 +6,22 @@ import com.example.maddexjavafinal.database.Database;
 import com.example.maddexjavafinal.pojo.Poke;
 import com.example.maddexjavafinal.pojo.Type;
 import com.example.maddexjavafinal.pojo.ViewPoke;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import static com.example.maddexjavafinal.GsonFunc.*;
+import static com.example.maddexjavafinal.GsonFunc.getDexNum;
 
 public class PokeTable implements PokeDAO {
 
@@ -19,52 +30,72 @@ public class PokeTable implements PokeDAO {
     TypeTable typeTable = new TypeTable();
 
     @Override
-    public void createPoke(Poke pokemon) {
+    public void createPoke(String pokeName, String gender, String shiny) {
         Statement insert;
         Statement many;
         Statement many2;
 
+        HttpURLConnection connection = null;
         try {
-            if (pokemon.getType().size() > 1) {
-                String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
-                        " `generation`) VALUES (" + pokemon.getId() + ", '" +
-                        pokemon.getSprite() + "', '" + pokemon.getName() + "', " +
-                        pokemon.getGen() + ")";
-                insert = db.getConnection().createStatement();
-                insert.execute(insertStatement);
-                System.out.println("The pokemon " + pokemon.getName() + " has been added to the database.");
+            connection = (HttpURLConnection)
+                    new URL("https://pokeapi.co/api/v2/pokemon/" + pokeName).openConnection();
 
-                String manyInsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
-                        pokemon.getId() + ", " + pokemon.getType().get(0) + ")";
-                many = db.getConnection().createStatement();
-                many.execute(manyInsertStatement);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                JsonReader reader = new JsonReader(new InputStreamReader(connection.getInputStream()));
+                JsonElement element = JsonParser.parseReader(reader);
+                JsonObject object = element.getAsJsonObject();
 
-                String many2InsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
-                        pokemon.getId() + ", " + pokemon.getType().get(1) + ")";
-                many2 = db.getConnection().createStatement();
-                many2.execute(many2InsertStatement);
-            } else {
+                Poke poke = new Poke(getDexNum(object), getPokeSprite(object, gender, shiny), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
 
-                String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
-                        " `generation`) VALUES (" + pokemon.getId() + ", '" + pokemon.getSprite() +
-                        "', '" + pokemon.getName() + "', " + pokemon.getGen() + ")";
-                insert = db.getConnection().createStatement();
-                insert.execute(insertStatement);
-                System.out.println("The pokemon " + pokemon.getName() + " has been added to the database.");
+                try {
+                    if (poke.getType().size() > 1) {
+                        String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
+                                " `generation`) VALUES (" + poke.getId() + ", '" +
+                                poke.getSprite() + "', '" + poke.getName() + "', " +
+                                poke.getGen() + ")";
+                        insert = db.getConnection().createStatement();
+                        insert.execute(insertStatement);
+                        System.out.println("The pokemon " + poke.getName() + " has been added to the database.");
 
-                String manyInsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
-                        pokemon.getId() + ", " + pokemon.getType().get(0) + ")";
-                many = db.getConnection().createStatement();
-                many.execute(manyInsertStatement);
+                        String manyInsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
+                                poke.getId() + ", " + poke.getType().get(0) + ")";
+                        many = db.getConnection().createStatement();
+                        many.execute(manyInsertStatement);
 
-                System.out.println("The POKEMON_TYPE table was updated.");
+                        String many2InsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
+                                poke.getId() + ", " + poke.getType().get(1) + ")";
+                        many2 = db.getConnection().createStatement();
+                        many2.execute(many2InsertStatement);
+                    } else {
+
+                        String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
+                                " `generation`) VALUES (" + poke.getId() + ", '" + poke.getSprite() +
+                                "', '" + poke.getName() + "', " + poke.getGen() + ")";
+                        insert = db.getConnection().createStatement();
+                        insert.execute(insertStatement);
+                        System.out.println("The pokemon " + poke.getName() + " has been added to the database.");
+
+                        String manyInsertStatement = "INSERT INTO POKEMON_TYPE (`dex_num`, `type`) VALUES (" +
+                                poke.getId() + ", " + poke.getType().get(0) + ")";
+                        many = db.getConnection().createStatement();
+                        many.execute(manyInsertStatement);
+
+                        System.out.println("The POKEMON_TYPE table was updated.");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (SQLException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
+        @Override
     public ArrayList<Poke> getAllPoke() {
         String query = "SELECT * FROM " + DBTableVals.TABLE_POKEMON;
         pokes = new ArrayList<>();
@@ -103,17 +134,43 @@ public class PokeTable implements PokeDAO {
     }
 
     @Override
-    public void deletePoke(Poke poke) {
-        String query = "DELETE FROM " + DBTableVals.TABLE_POKEMON + " WHERE " + DBTableVals.POKEMON_COLUMN_ID + " = " + poke.getId();
+    public void deletePoke(String pokeName) {
+        HttpURLConnection connection = null;
         try {
-            db.getConnection().createStatement().execute(query);
-            System.out.println("Pokemon deleted");
-        } catch (SQLException e) {
+            connection = (HttpURLConnection)
+                    new URL("https://pokeapi.co/api/v2/pokemon/" + pokeName).openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+                JsonReader reader = new JsonReader(new InputStreamReader(connection.getInputStream()));
+                JsonElement element = JsonParser.parseReader(reader);
+                JsonObject object = element.getAsJsonObject();
+
+                String query = "DELETE FROM " + DBTableVals.TABLE_MANY + " WHERE " + DBTableVals.MANY_COLUMN_POKEMON + " = " + getDexNum(object);
+
+                try {
+                    db.getConnection().createStatement().execute(query);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                String query3 = "DELETE FROM " + DBTableVals.TABLE_POKEMON + " WHERE " + DBTableVals.POKEMON_COLUMN_NAME + " = '" + getPokeName(object) + "'";
+                try {
+                    db.getConnection().createStatement().execute(query3);
+                    System.out.println(pokeName + " has been deleted.");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<ViewPoke> displayPokes() {
+        public ArrayList<ViewPoke> displayPokes() {
         ArrayList<ViewPoke> pokes = new ArrayList<>();
         String query1 = DBTableVals.POKE_GRAB;
         try {

@@ -3,6 +3,7 @@ package com.example.maddexjavafinal;
 import com.example.maddexjavafinal.database.DBTableVals;
 import com.example.maddexjavafinal.database.Database;
 import com.example.maddexjavafinal.pojo.Poke;
+import com.example.maddexjavafinal.scenes.HomeScene;
 import com.example.maddexjavafinal.tabs.AddGenTableTab;
 import com.example.maddexjavafinal.tabs.AddHomeTableTab;
 import com.example.maddexjavafinal.tabs.AddStatsTab;
@@ -37,63 +38,9 @@ public class HelloApplication extends Application {
 
         Database.getInstance();
 
-        String query = "INSERT INTO " + DBTableVals.TABLE_TYPE +
-                "(" + DBTableVals.TYPE_COLUMN_TYPE + ", " +
-                "";
-
-        //Build Pokémon
-        HttpURLConnection connection = (HttpURLConnection)
-                new URL("https://pokeapi.co/api/v2/pokemon/sneasel").openConnection();
-        int dexNum = 0;
-        int gen = 0;
-        if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-            JsonReader reader = new JsonReader(new InputStreamReader(connection.getInputStream()));
-            JsonElement element = JsonParser.parseReader(reader);
-            JsonObject object = element.getAsJsonObject();
-            //object
-            Poke poke = new Poke(getDexNum(object), getPokeSprite(object, "M", "Y"), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
-            System.out.println(poke);
-
-         //try {
-         //    insertPokemon(poke);
-         //} catch (SQLException e) {
-         //    e.printStackTrace();
-         //}
-        }
-
-
-
-        BorderPane root = new BorderPane();
-
-
-        //Build menubar
-        MenuBar menu = new MenuBar();
-        //Menu items
-        Menu fileMenu = new Menu("File");
-        MenuItem exit = new MenuItem("Exit");
-        exit.setOnAction(e -> {
-            System.exit(0);
-        });
-        fileMenu.getItems().add(exit);
-        //Add items to Bar
-        menu.getMenus().addAll(fileMenu);
-        root.setTop(menu);
-
-        //Create a TabPane
-        TabPane tabPane = new TabPane();
-        //Create tabs
-        AddHomeTableTab addHomeTableTab = AddHomeTableTab.getInstance();
-        AddTypeTableTab addTypeTableTab = AddTypeTableTab.getInstance();
-        AddGenTableTab addGenTableTab = AddGenTableTab.getInstance();
-        AddStatsTab addStatsTab = AddStatsTab.getInstance();
-        tabPane.getTabs().addAll(addHomeTableTab, addTypeTableTab, addGenTableTab, addStatsTab);
-        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-
-        root.setCenter(tabPane);
-        Scene scene = new Scene(root, 1024, 768);
         otherStage = new Stage();
         otherStage.setTitle("MAD Dex");
-        otherStage.setScene(scene);
+        otherStage.setScene(new HomeScene());
         otherStage.show();
     }
 
