@@ -5,11 +5,14 @@ import com.example.maddexjavafinal.scenes.ConfirmationScene;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class RemovePokePane extends BorderPane {
+public class RemovePokePane extends StackPane {
 
     public static String removedPoke;
 
@@ -32,7 +35,10 @@ public class RemovePokePane extends BorderPane {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(25);
 
+        ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));
+        background.setFitHeight(384);
+        background.setFitWidth(512);
 
-        this.setCenter(vBox);
+        this.getChildren().addAll(background, vBox);
     }
 }

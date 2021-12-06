@@ -6,11 +6,14 @@ import com.example.maddexjavafinal.scenes.InsertFormScene;
 import com.example.maddexjavafinal.scenes.RemovePokeScene;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
-public class AddOrRemovePane extends BorderPane {
+public class AddOrRemovePane extends StackPane {
     public AddOrRemovePane() {
         HBox hBox = new HBox();
 
@@ -32,6 +35,10 @@ public class AddOrRemovePane extends BorderPane {
         hBox.getChildren().addAll(addButt, removeButt);
         hBox.setAlignment(Pos.CENTER);
 
-        this.setCenter(hBox);
+        ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));
+        background.setFitHeight(384);
+        background.setFitWidth(512);
+
+        this.getChildren().addAll(background, hBox);
     }
 }

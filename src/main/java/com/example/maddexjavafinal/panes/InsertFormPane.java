@@ -8,13 +8,16 @@ import com.example.maddexjavafinal.tabs.AddHomeTableTab;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class InsertFormPane extends BorderPane {
+public class InsertFormPane extends StackPane {
 
     public static String pokeGender;
     public static String pokeShiny = "N";
@@ -80,6 +83,10 @@ public class InsertFormPane extends BorderPane {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
-        this.setCenter(vBox);
+        ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));
+        background.setFitHeight(384);
+        background.setFitWidth(512);
+
+        this.getChildren().addAll(background, vBox);
     }
 }

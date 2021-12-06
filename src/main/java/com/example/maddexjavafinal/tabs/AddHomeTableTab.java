@@ -6,6 +6,8 @@ import com.example.maddexjavafinal.pojo.ViewPoke;
 import com.example.maddexjavafinal.scenes.AddOrRemoveScene;
 import com.example.maddexjavafinal.tables.PokeTable;
 import com.example.maddexjavafinal.tables.TypeTable;
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -16,10 +18,16 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
+
+import java.io.File;
 
 
 public class AddHomeTableTab extends Tab {
@@ -29,7 +37,8 @@ public class AddHomeTableTab extends Tab {
         this.setText("Home Table");
         PokeTable pokeTable = new PokeTable();
 
-        BorderPane root = new BorderPane();
+        StackPane root = new StackPane();
+        VBox vBox = new VBox();
         tableView = new TableView();
 
         TableColumn<ViewPoke, Number> idColumn = new TableColumn<>("PokeDex Number");
@@ -51,7 +60,6 @@ public class AddHomeTableTab extends Tab {
         tableView.getItems().addAll(pokeTable.displayPokes());
         tableView.setMaxSize(512, 384);
 
-        root.setCenter(tableView);
 
         HBox edit = new HBox();
 
@@ -65,7 +73,14 @@ public class AddHomeTableTab extends Tab {
         editButt.setFont(new Font(18));
         edit.setPadding(new Insets(50));
 
-        root.setBottom(edit);
+        vBox.getChildren().addAll(tableView, edit);
+        vBox.setAlignment(Pos.CENTER);
+
+        ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));
+        background.setFitHeight(720);
+        background.setFitWidth(1024);
+
+        root.getChildren().addAll(background, vBox);
 
         this.setContent(root);
     }

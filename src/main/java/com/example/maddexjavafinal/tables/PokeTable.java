@@ -34,6 +34,9 @@ public class PokeTable implements PokeDAO {
         Statement insert;
         Statement many;
         Statement many2;
+        if (pokeName == "deoxys") {
+            pokeName = "deoxys-normal";
+        }
 
         HttpURLConnection connection = null;
         try {
