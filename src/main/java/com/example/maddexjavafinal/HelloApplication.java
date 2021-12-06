@@ -31,6 +31,7 @@ import static com.example.maddexjavafinal.GsonFunc.*;
 import static com.example.maddexjavafinal.database.Database.insertPokemon;
 
 public class HelloApplication extends Application {
+    public static Stage otherStage;
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -42,7 +43,7 @@ public class HelloApplication extends Application {
 
         //Build Pokémon
         HttpURLConnection connection = (HttpURLConnection)
-                new URL("https://pokeapi.co/api/v2/pokemon/porygon").openConnection();
+                new URL("https://pokeapi.co/api/v2/pokemon/sneasel").openConnection();
         int dexNum = 0;
         int gen = 0;
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -90,9 +91,10 @@ public class HelloApplication extends Application {
 
         root.setCenter(tabPane);
         Scene scene = new Scene(root, 1024, 768);
-        stage.setTitle("MAD Dex");
-        stage.setScene(scene);
-        stage.show();
+        otherStage = new Stage();
+        otherStage.setTitle("MAD Dex");
+        otherStage.setScene(scene);
+        otherStage.show();
     }
 
     public static void main(String[] args) {

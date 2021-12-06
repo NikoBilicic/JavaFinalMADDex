@@ -43,12 +43,14 @@ public class DBTableVals {
             TABLE_TYPE + "(" +TYPE_COLUMN_ID + "), PRIMARY KEY (" + MANY_COLUMN_POKEMON + ", " +
             MANY_COLUMN_TYPE + "));";
 
-    //Grab Pokemon Statements
-    public static final String GRAB_POKE = "SELECT TYPE.type, POKEMON.dex_num, POKEMON.sprite, POKEMON.name, POKEMON.generation FROM " +
+    //View related statements
+    public static final String VIEW_NAME = "pokeview";
+    public static final String POKE_VIEW = "SELECT TYPE.type, POKEMON.dex_num, POKEMON.sprite, POKEMON.name, POKEMON.generation FROM " +
             "POKEMON INNER JOIN POKEMON_TYPE ON " +
             "POKEMON.dex_num = POKEMON_TYPE.dex_num INNER JOIN TYPE ON POKEMON_TYPE.type = TYPE.id;";
-    public static final String GRAB_POKE_TYPE = "SELECT TYPE.type FROM POKEMON INNER JOIN POKEMON_TYPE ON POKEMON.dex_num = POKEMON_TYPE.dex_num " +
-            "INNER JOIN TYPE ON POKEMON_TYPE.type = TYPE.id;";
+    public static final String POKE_GRAB = "SELECT * FROM pokeview";
+    public static final String GRAB_TYPE = "GROUP_CONCAT(DISTINCT t.type SEPARATOR ', ')";
+
 
     //TABLE FILL statements
     public static String[] typing = {"normal", "fighting", "flying", "poison", "ground", "rock", "bug",

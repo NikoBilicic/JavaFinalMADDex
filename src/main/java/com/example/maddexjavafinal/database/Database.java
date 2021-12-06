@@ -32,6 +32,8 @@ public class Database {
                 //create many table
                 createTable(DBTableVals.TABLE_MANY,
                         DBTableVals.CREATE_TABLE_MANY, connection);
+                //create pokeview
+                createView(VIEW_NAME, POKE_VIEW, connection);
                 //populate type table
                 populateType(DBTableVals.TABLE_TYPE,
                         DBTableVals.TABLE_TYPE_POPULATE, connection);
@@ -76,6 +78,24 @@ public class Database {
             createTable = connection.createStatement();
             createTable.execute(tableQuery);
             System.out.println("The " + tableName + " table has been inserted.");
+        }
+    }
+
+    private void createView(String viewName, String viewQuery,
+                             Connection connection) throws SQLException {
+        Statement createView;
+        //database info
+        DatabaseMetaData md = connection.getMetaData();
+        //search for table with tableName
+        ResultSet resultSet = md.getTables(DBConst.DB_NAME,
+                null, viewName, null);
+        //check if table exists
+        if (resultSet.next()) {
+            System.out.println(viewName + " table already exists!");
+        } else {
+            createView = connection.createStatement();
+            createView.execute(viewQuery);
+            System.out.println("The " + viewName + " table has been inserted.");
         }
     }
 
