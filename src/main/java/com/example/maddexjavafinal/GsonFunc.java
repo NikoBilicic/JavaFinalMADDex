@@ -55,7 +55,7 @@ public class GsonFunc {
             String sprite = String.valueOf(allSprites.get("front_shiny_female"));
             return String.valueOf(sprite).replaceAll("\"", "");
         }
-        return null;
+        return pokeSprite;
     }
 
     //Function to get pokemon name

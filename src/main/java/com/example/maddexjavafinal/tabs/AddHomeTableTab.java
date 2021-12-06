@@ -58,7 +58,7 @@ public class AddHomeTableTab extends Tab {
 
         tableView.getColumns().addAll(idColumn, spriteColumn, nameColumn, typeColumn, genColumn);
         tableView.getItems().addAll(pokeTable.displayPokes());
-        tableView.setMaxSize(512, 384);
+        tableView.setMaxSize(380, 384);
 
 
         HBox edit = new HBox();

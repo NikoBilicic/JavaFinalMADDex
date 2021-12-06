@@ -60,7 +60,11 @@ public class InsertFormPane extends StackPane {
 
         Button submitButt = new Button();
         submitButt.setOnAction(e -> {
-            pokeGender = gender.getSelectedToggle().toString();
+            if (gender.getSelectedToggle() == male) {
+                pokeGender = "M";
+            } else {
+                pokeGender = "F";
+            }
             if (shiny.isSelected()) {
                 pokeShiny = "Y";
             } else {

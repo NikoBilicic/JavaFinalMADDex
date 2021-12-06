@@ -10,14 +10,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class TypeTable {
+public class GenTable {
 
     Database db = Database.getInstance();
     ArrayList<Poke> pokes;
 
-    public ArrayList<ViewPoke> displayPokes(String type) {
+    public ArrayList<ViewPoke> displayPokes(int gen) {
         ArrayList<ViewPoke> pokes = new ArrayList<>();
-        String query = DBTableVals.POKE_TYPE_GRAB + type + "%';";
+        String query = DBTableVals.POKE_GEN_GRAB + gen;
         try {
             Statement getPokes = db.getConnection().createStatement();
             ResultSet poke = getPokes.executeQuery(query);

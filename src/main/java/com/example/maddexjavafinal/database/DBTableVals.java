@@ -45,11 +45,15 @@ public class DBTableVals {
 
     //View related statements
     public static final String VIEW_NAME = "pokeview";
-    public static final String POKE_VIEW = "SELECT TYPE.type, POKEMON.dex_num, POKEMON.sprite, POKEMON.name, POKEMON.generation FROM " +
-            "POKEMON INNER JOIN POKEMON_TYPE ON " +
-            "POKEMON.dex_num = POKEMON_TYPE.dex_num INNER JOIN TYPE ON POKEMON_TYPE.type = TYPE.id;";
+    public static final String POKE_VIEW = "CREATE VIEW pokeview AS SELECT p.dex_num, p.sprite, p.name, GROUP_CONCAT(DISTINCT t.type SEPARATOR ', ') AS type, p.generation " +
+            "FROM TYPE AS t " +
+            "INNER JOIN POKEMON_TYPE AS pt ON t.id=pt.type " +
+            "INNER JOIN POKEMON AS p ON pt.dex_num=p.dex_num " +
+            "GROUP BY p.dex_num, p.sprite, p.name, p.generation";
     public static final String POKE_GRAB = "SELECT * FROM pokeview";
-    public static final String GRAB_TYPE = "GROUP_CONCAT(DISTINCT t.type SEPARATOR ', ')";
+    public static final String POKE_TYPE_GRAB = "SELECT * FROM pokeview WHERE type LIKE '%";
+    public static final String POKE_GEN_GRAB = "SELECT * FROM pokeview WHERE generation = ";
+    public static final String GRAB_TYPE = "type";
 
 
     //TABLE FILL statements

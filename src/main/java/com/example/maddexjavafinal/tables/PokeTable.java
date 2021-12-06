@@ -27,7 +27,6 @@ public class PokeTable implements PokeDAO {
 
     Database db = Database.getInstance();
     ArrayList<Poke> pokes;
-    TypeTable typeTable = new TypeTable();
 
     @Override
     public void createPoke(String pokeName, String gender, String shiny) {
