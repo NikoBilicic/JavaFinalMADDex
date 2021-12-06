@@ -13,10 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,6 +33,7 @@ public class AddHomeTableTab extends Tab {
     private AddHomeTableTab() {
         this.setText("Home Table");
         PokeTable pokeTable = new PokeTable();
+        final ImageView imageview = new ImageView();
 
         StackPane root = new StackPane();
         VBox vBox = new VBox();
@@ -45,7 +43,9 @@ public class AddHomeTableTab extends Tab {
         idColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getId()));
 
         TableColumn<ViewPoke, String> spriteColumn = new TableColumn<>("Sprite");
-        spriteColumn.setCellValueFactory(e -> new SimpleStringProperty("sprite"));
+        spriteColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getSprite()))))
+        TableCell<ViewPoke, String> cell = new TableCell<ViewPoke, String>();
+        //cell.setGraphic(imageview.setImage(new Image(path)));
 
         TableColumn<ViewPoke, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getName()));
