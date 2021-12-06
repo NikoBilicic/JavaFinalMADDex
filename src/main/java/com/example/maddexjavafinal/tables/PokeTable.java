@@ -5,6 +5,7 @@ import com.example.maddexjavafinal.database.DBTableVals;
 import com.example.maddexjavafinal.database.Database;
 import com.example.maddexjavafinal.pojo.Poke;
 import com.example.maddexjavafinal.pojo.Type;
+import com.example.maddexjavafinal.pojo.ViewPoke;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -110,5 +111,51 @@ public class PokeTable implements PokeDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<ViewPoke> displayPokes() {
+        ArrayList<ViewPoke> pokes = new ArrayList<>();
+        String query1 = DBTableVals.GRAB_POKE;
+        String query2 = DBTableVals.GRAB_POKE_TYPE;
+        try {
+            Statement getPokes = db.getConnection().createStatement();
+            //Statement getTypes = db.getConnection().createStatement();
+            ResultSet poke = getPokes.executeQuery(query1);
+            //ResultSet type = getTypes.executeQuery(query2);
+
+
+
+            while (poke.next()) {
+               Statement getTypes = db.getConnection().createStatement();
+               ResultSet type = getTypes.executeQuery(query2);
+               System.out.println(type.next());
+               
+               String checkCount = "SELECT COUNT(TYPE.type) FROM POKEMON INNER JOIN POKEMON_TYPE ON POKEMON.dex_num = POKEMON_TYPE.dex_num INNER JOIN TYPE ON POKEMON_TYPE.type = TYPE.id;";
+               Statement countCheck = db.getConnection().createStatement();
+               ResultSet resultSet = countCheck.executeQuery(checkCount);
+               resultSet.next();
+               int count = resultSet.getInt(1);
+
+               if (count > 1) {
+                    pokes.add(new ViewPoke(poke.getInt(DBTableVals.POKEMON_COLUMN_ID),
+                            poke.getString(DBTableVals.POKEMON_COLUMN_SPRITE),
+                            poke.getString(DBTableVals.POKEMON_COLUMN_NAME),
+                            poke.getString(DBTableVals.TYPE_COLUMN_TYPE),
+                            type.getString(DBTableVals.MANY_COLUMN_TYPE),
+                            poke.getInt(DBTableVals.POKEMON_COLUMN_GEN)));
+               } else  {
+                   pokes.add(new ViewPoke(poke.getInt(DBTableVals.POKEMON_COLUMN_ID),
+                           poke.getString(DBTableVals.POKEMON_COLUMN_SPRITE),
+                           poke.getString(DBTableVals.POKEMON_COLUMN_NAME),
+                           type.getString(DBTableVals.TYPE_COLUMN_TYPE),
+                           "",
+                           poke.getInt(DBTableVals.POKEMON_COLUMN_GEN)));
+               }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pokes;
     }
 }

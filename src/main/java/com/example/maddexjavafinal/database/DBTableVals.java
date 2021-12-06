@@ -43,14 +43,12 @@ public class DBTableVals {
             TABLE_TYPE + "(" +TYPE_COLUMN_ID + "), PRIMARY KEY (" + MANY_COLUMN_POKEMON + ", " +
             MANY_COLUMN_TYPE + "));";
 
-    //linking statement that displays proper table info
-    // SELECT POKEMON.dex_num, POKEMON.sprite, POKEMON.name, TYPE.type, POKEMON.generation FROM POKEMON, TYPE, POKEMON_TYPE WHERE POKEMON.dex_num = POKEMON_TYPE.dex_num AND TYPE.id = POKEMON_TYPE.type;
-
-
-    //SELECT POKEMON.dex_num, POKEMON.sprite, POKEMON.name, POKEMON.generation, TYPE.type AS TypeName
-    //FROM POKEMON
-    //INNER JOIN TYPE
-    //ON POKEMON.poke_type = TYPE.id;
+    //Grab Pokemon Statements
+    public static final String GRAB_POKE = "SELECT TYPE.type, POKEMON.dex_num, POKEMON.sprite, POKEMON.name, POKEMON.generation FROM " +
+            "POKEMON INNER JOIN POKEMON_TYPE ON " +
+            "POKEMON.dex_num = POKEMON_TYPE.dex_num INNER JOIN TYPE ON POKEMON_TYPE.type = TYPE.id;";
+    public static final String GRAB_POKE_TYPE = "SELECT TYPE.type FROM POKEMON INNER JOIN POKEMON_TYPE ON POKEMON.dex_num = POKEMON_TYPE.dex_num " +
+            "INNER JOIN TYPE ON POKEMON_TYPE.type = TYPE.id;";
 
     //TABLE FILL statements
     public static String[] typing = {"normal", "fighting", "flying", "poison", "ground", "rock", "bug",
