@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -18,6 +19,7 @@ public class AddGenTableTab extends Tab {
 
     private static  AddGenTableTab tab;
     public static TableView tableView;
+    public ImageView imageView;
 
     private AddGenTableTab() {
         this.setText("Generation Table");
@@ -26,12 +28,13 @@ public class AddGenTableTab extends Tab {
         StackPane root = new StackPane();
         VBox vBox = new VBox();
         tableView = new TableView();
+        imageView = new ImageView();
 
-        TableColumn<ViewPoke, Number> idColumn = new TableColumn<>("PokeDex Number");
+        TableColumn<ViewPoke, Number> idColumn = new TableColumn<>("Dex Number");
         idColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getId()));
 
-        TableColumn<ViewPoke, String> spriteColumn = new TableColumn<>("Sprite");
-        spriteColumn.setCellValueFactory(e -> new SimpleStringProperty("sprite"));
+        TableColumn<ViewPoke, String> spriteColumn = new TableColumn<>("Sprites");
+        spriteColumn.setCellValueFactory(e -> new SimpleStringProperty("Select to show sprite."));
 
         TableColumn<ViewPoke, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getName()));
@@ -39,16 +42,32 @@ public class AddGenTableTab extends Tab {
         TableColumn<ViewPoke, String> typeColumn = new TableColumn<>("Typing");
         typeColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getType()));
 
-        TableColumn<ViewPoke, Number> genColumn = new TableColumn<>("Generation");
+        TableColumn<ViewPoke, Number> genColumn = new TableColumn<>("Gen");
         genColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getGen()));
 
         tableView.getColumns().addAll(idColumn, spriteColumn, nameColumn, typeColumn, genColumn);
         tableView.getItems().addAll(pokeTable.displayPokes());
-        tableView.setMaxSize(380, 384);
+        tableView.setMaxSize(395, 384);
+
+        HBox otherBox = new HBox();
+        otherBox.setAlignment(Pos.CENTER);
+        otherBox.setSpacing(25);
+
+        HBox buttonBox = new HBox();
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setSpacing(25);
 
         TextField typeInput = new TextField();
         typeInput.setText("Please input the generation you would like to filter by");
         typeInput.setMaxWidth(300);
+
+        Button showSpriteButt = new Button("Show Sprite");
+        showSpriteButt.setOnAction(e -> {
+            ViewPoke pokemon = (ViewPoke) tableView.getSelectionModel().getSelectedItem();
+            imageView.setImage(new Image(pokemon.getSprite()));
+        });
+        showSpriteButt.wrapTextProperty();
+        showSpriteButt.setFont(new Font(18));
 
         Button submitButt = new Button();
         submitButt.setText("Filter");
@@ -59,7 +78,10 @@ public class AddGenTableTab extends Tab {
         submitButt.setPrefSize(75,25);
         submitButt.setFont(new Font(18));
 
-        vBox.getChildren().addAll(typeInput, submitButt, tableView);
+        otherBox.getChildren().addAll(tableView, imageView);
+        buttonBox.getChildren().addAll(submitButt, showSpriteButt);
+
+        vBox.getChildren().addAll(typeInput, buttonBox, otherBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(25);
 

@@ -1,51 +1,41 @@
 package com.example.maddexjavafinal.tabs;
 
 import com.example.maddexjavafinal.HelloApplication;
-import com.example.maddexjavafinal.pojo.Poke;
 import com.example.maddexjavafinal.pojo.ViewPoke;
 import com.example.maddexjavafinal.scenes.AddOrRemoveScene;
 import com.example.maddexjavafinal.tables.PokeTable;
-import com.example.maddexjavafinal.tables.TypeTable;
-import javafx.animation.Interpolator;
-import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
-
-import java.io.File;
 
 
 public class AddHomeTableTab extends Tab {
     private static  AddHomeTableTab tab;
     public static TableView tableView;
+    public ImageView imageView;
     private AddHomeTableTab() {
         this.setText("Home Table");
         PokeTable pokeTable = new PokeTable();
-        final ImageView imageview = new ImageView();
 
         StackPane root = new StackPane();
         VBox vBox = new VBox();
         tableView = new TableView();
+        imageView = new ImageView();
 
-        TableColumn<ViewPoke, Number> idColumn = new TableColumn<>("PokeDex Number");
+        TableColumn<ViewPoke, Number> idColumn = new TableColumn<>("Dex Number");
         idColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getId()));
 
-        TableColumn<ViewPoke, String> spriteColumn = new TableColumn<>("Sprite");
-        spriteColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getSprite()))))
-        TableCell<ViewPoke, String> cell = new TableCell<ViewPoke, String>();
-        //cell.setGraphic(imageview.setImage(new Image(path)));
+        TableColumn<ViewPoke, String> spriteColumn = new TableColumn<>("Sprites");
+        spriteColumn.setCellValueFactory(e -> new SimpleStringProperty("Select to show sprite."));
 
         TableColumn<ViewPoke, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getName()));
@@ -53,27 +43,41 @@ public class AddHomeTableTab extends Tab {
         TableColumn<ViewPoke, String> typeColumn = new TableColumn<>("Typing");
         typeColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getType()));
 
-        TableColumn<ViewPoke, Number> genColumn = new TableColumn<>("Generation");
+        TableColumn<ViewPoke, Number> genColumn = new TableColumn<>("Gen");
         genColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getGen()));
 
-        tableView.getColumns().addAll(idColumn, spriteColumn, nameColumn, typeColumn, genColumn);
-        tableView.getItems().addAll(pokeTable.displayPokes());
-        tableView.setMaxSize(380, 384);
-
+       tableView.getColumns().addAll(idColumn, spriteColumn, nameColumn, typeColumn, genColumn);
+       tableView.getItems().addAll(pokeTable.displayPokes());
+       tableView.setMaxSize(395, 384);
 
         HBox edit = new HBox();
+        HBox otherBox = new HBox();
+        otherBox.setAlignment(Pos.CENTER);
+        otherBox.setSpacing(25);
+
+        Button showSpriteButt = new Button("Show Sprite");
+        showSpriteButt.setOnAction(e -> {
+            ViewPoke pokemon = (ViewPoke) tableView.getSelectionModel().getSelectedItem();
+            imageView.setImage(new Image(pokemon.getSprite()));
+        });
 
         Button editButt = new Button("Edit");
         editButt.setOnAction(e -> {
             HelloApplication.otherStage.setScene(new AddOrRemoveScene());
         });
-        edit.getChildren().add(editButt);
+
+        edit.getChildren().addAll(editButt, showSpriteButt);
         edit.setAlignment(Pos.BOTTOM_CENTER);
         editButt.setPrefSize(75,25);
         editButt.setFont(new Font(18));
+        showSpriteButt.wrapTextProperty();
+        showSpriteButt.setFont(new Font(18));
         edit.setPadding(new Insets(50));
+        edit.setSpacing(25);
 
-        vBox.getChildren().addAll(tableView, edit);
+        otherBox.getChildren().addAll(tableView, imageView);
+
+        vBox.getChildren().addAll(otherBox, edit);
         vBox.setAlignment(Pos.CENTER);
 
         ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));

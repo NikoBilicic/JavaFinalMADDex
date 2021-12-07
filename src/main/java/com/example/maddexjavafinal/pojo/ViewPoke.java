@@ -1,5 +1,8 @@
 package com.example.maddexjavafinal.pojo;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class ViewPoke {
     private int id;
     private String sprite;
