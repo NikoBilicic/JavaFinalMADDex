@@ -71,10 +71,16 @@ public class AddGenTableTab extends Tab {
         Button showSpriteButt = new Button("Show Sprite");
         showSpriteButt.setOnAction(e -> {
             ViewPoke pokemon = (ViewPoke) tableView.getSelectionModel().getSelectedItem();
-            if (pokemon != null) {
-                imageView.setImage(new Image(pokemon.getSprite()));
+            if (pokemon == null) {
+                System.out.println("No pokemon selected");
+                imageView.setImage(new Image("file:src/imgResources/image-not-found.png"));
             } else {
-
+                if (pokemon.getSprite().equalsIgnoreCase("null")) {
+                    System.out.println("No Sprite in database");
+                    imageView.setImage(new Image("file:src/imgResources/image-not-found.png"));
+                } else {
+                    imageView.setImage(new Image(pokemon.getSprite()));
+                }
             }
         });
         showSpriteButt.wrapTextProperty();
