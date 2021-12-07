@@ -45,16 +45,25 @@ public class GsonFunc {
         JsonObject allSprites = object.getAsJsonObject("sprites");
         if (gender == "M" && shiny == "N") {
             String sprite = String.valueOf(allSprites.get("front_default"));
+            System.out.println(sprite);
             return String.valueOf(sprite).replaceAll("\"", "");
         } else if (gender == "M" && shiny == "Y") {
             String sprite = String.valueOf(allSprites.get("front_shiny"));
+            System.out.println(sprite);
             return String.valueOf(sprite).replaceAll("\"", "");
         } else if (gender == "F" && shiny == "N") {
             String sprite = String.valueOf(allSprites.get("front_female"));
-            return String.valueOf(sprite).replaceAll("\"", "");
+            if (sprite == null) {
+                sprite = String.valueOf(allSprites.get("front_default"));
+            }
+                return String.valueOf(sprite).replaceAll("\"", "");
         } else if (gender == "F" && shiny == "Y") {
             String sprite = String.valueOf(allSprites.get("front_shiny_female"));
-            return String.valueOf(sprite).replaceAll("\"", "");
+            if (sprite == null) {
+                sprite = String.valueOf(allSprites.get("front_shiny"));
+            }
+            System.out.println(sprite);
+                return String.valueOf(sprite).replaceAll("\"", "");
         }
         return pokeSprite;
     }
