@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -190,5 +191,31 @@ public class PokeTable implements PokeDAO {
             e.printStackTrace();
         }
         return pokes;
+    }
+
+    public int getTypeCount(String type) {
+        int count = 0;
+        try {
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT COUNT(*) FROM pokeview WHERE type LIKE '%" + type + "%';");
+            ResultSet rs = getCount.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getGenCount(int gen) {
+        int count = 0;
+        try {
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT COUNT(*) FROM pokeview WHERE generation = " + gen);
+            ResultSet rs = getCount.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
