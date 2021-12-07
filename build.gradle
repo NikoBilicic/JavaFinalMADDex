@@ -1,3 +1,12 @@
+buildscript{
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "mysql:mysql-connector-java:8.0.26"
+    }
+}
+
 plugins {
     id 'java'
     id 'application'
@@ -9,6 +18,10 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+dependencies {
+    implementation "mysql:mysql-connector-java:8.0.26"
+    implementation "com.google.code.gson:gson:2.8.9"
 }
 
 ext {
