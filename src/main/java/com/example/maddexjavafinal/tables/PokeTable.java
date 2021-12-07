@@ -26,14 +26,17 @@ import static com.example.maddexjavafinal.GsonFunc.getDexNum;
 
 public class PokeTable implements PokeDAO {
 
+
     Database db = Database.getInstance();
     ArrayList<Poke> pokes;
 
+    //function to insert pokemon into the database
     @Override
     public void createPoke(String pokeName, String gender, String shiny) {
         Statement insert;
         Statement many;
         Statement many2;
+        //set defaults for pokemon with special names
         if (pokeName.equalsIgnoreCase("deoxys")) {
             pokeName = "deoxys-normal";
         } else if (pokeName.equalsIgnoreCase("giratina")) {
@@ -90,6 +93,7 @@ public class PokeTable implements PokeDAO {
 
         HttpURLConnection connection = null;
         try {
+            //creates connection to api using input pokemon name
             connection = (HttpURLConnection)
                     new URL("https://pokeapi.co/api/v2/pokemon/" + pokeName).openConnection();
 
@@ -105,6 +109,7 @@ public class PokeTable implements PokeDAO {
                 Poke poke = new Poke(getDexNum(object), getPokeSprite(object, gender, shiny), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
 
                 try {
+                    //insert statements for POKEMON table and POKEMON_TYPE table depending on whether the pokemon is mono or dual type
                     if (poke.getType().size() > 1) {
                         String insertStatement = "INSERT INTO POKEMON (`dex_num`, `sprite`, `name`," +
                                 " `generation`) VALUES (" + poke.getId() + ", '" +
@@ -186,6 +191,7 @@ public class PokeTable implements PokeDAO {
         return null;
     }
 
+    //function to drop pokemon from database
     @Override
     public void deletePoke(String pokeName) {
         HttpURLConnection connection = null;
@@ -223,6 +229,7 @@ public class PokeTable implements PokeDAO {
         }
     }
 
+    //Calls arraylist of pokemon for the generation table
         public ArrayList<ViewPoke> displayPokes() {
         ArrayList<ViewPoke> pokes = new ArrayList<>();
         String query1 = DBTableVals.POKE_GRAB;
@@ -243,6 +250,7 @@ public class PokeTable implements PokeDAO {
         return pokes;
     }
 
+    //get totals of specific types for stats pane
     public int getTypeCount(String type) {
         int count = 0;
         try {
@@ -256,6 +264,7 @@ public class PokeTable implements PokeDAO {
         return count;
     }
 
+    //gets total shinies for stats pane
     public int getShinyCount() {
         int count = 0;
         try {
@@ -269,6 +278,7 @@ public class PokeTable implements PokeDAO {
         return count;
     }
 
+    //gets total count for stats pane
     public int getCount() {
         int count = 0;
         try {

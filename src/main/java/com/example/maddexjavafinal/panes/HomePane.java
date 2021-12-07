@@ -37,6 +37,7 @@ public class HomePane extends BorderPane {
         AddGenTableTab addGenTableTab = AddGenTableTab.getInstance();
         AddStatsTab addStatsTab = AddStatsTab.getInstance();
         tabPane.getTabs().addAll(addHomeTableTab, addTypeTableTab, addGenTableTab, addStatsTab);
+        //remove ability to delete tabs
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         this.setCenter(tabPane);

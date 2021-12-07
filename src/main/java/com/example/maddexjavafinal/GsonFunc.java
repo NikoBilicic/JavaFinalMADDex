@@ -10,7 +10,7 @@ import static com.example.maddexjavafinal.database.DBTableVals.typing;
 public class GsonFunc {
 
     /**
-     * Pokemon with form issues
+     * Pokemon with special name issues
      * Deoxys = default:deoxys-normal, deoxys-attack, deoxys-defense, deoxys-speed
      * @Wormadam = wormadam-plant, wormadam-sandy, wormadam-trash
      * Giratina = default:giratina-altered, giratina-origin
@@ -41,6 +41,7 @@ public class GsonFunc {
     //function to get pokemon sprite
     public static String getPokeSprite(JsonObject object, String gender, String shiny) {
         String pokeSprite = "";
+        //checks input gender and shiny to grab proper sprite
         JsonObject allSprites = object.getAsJsonObject("sprites");
         if (gender == "M" && shiny == "N") {
             String sprite = String.valueOf(allSprites.get("front_default"));
@@ -76,6 +77,7 @@ public class GsonFunc {
     public static ArrayList<Integer> getPokeTyping(JsonObject object) {
         JsonArray types = object.getAsJsonArray("types");
         ArrayList<Integer> typesArray = new ArrayList<>();
+        //checks if pokemon is mono or dual type and responds accordingly
         if (types.size() > 1) {
             JsonObject type1 = (JsonObject) types.get(0);
             JsonObject type1Type = type1.getAsJsonObject("type");
@@ -112,6 +114,7 @@ public class GsonFunc {
     }
 
     //function to get pokemon generation
+    //uses pokemon dex number to find generation
     public static Integer getPokeGen(int dexNum) {
         if (dexNum >= 1 && dexNum <= 151) {
             return 1;

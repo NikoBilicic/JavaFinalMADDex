@@ -44,6 +44,7 @@ public class HelloApplication extends Application {
 
         Database.getInstance();
 
+        //sets stage for entire application
         otherStage = new Stage();
         otherStage.setTitle("MAD Dex");
         otherStage.setScene(new HomeScene());

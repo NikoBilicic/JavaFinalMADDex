@@ -28,23 +28,29 @@ public class AddStatsTab extends Tab {
 
     private AddStatsTab() {
         this.setText("Statistics");
+        //call pokeTable and pokeTable functions into view
         PokeTable pokeTable = new PokeTable();
+        //initialize stats pie-chart
         typeGraph = new PieChart();
         typeGraph.setTitle("Types");
         typeGraph.setLabelsVisible(true);
 
+        //title for stats tab
         Text title = new Text("Statistics");
         title.setTextAlignment(TextAlignment.CENTER);
         title.setFont(new Font(25));
 
+        //text to display the amount of pokemon in database
         Text totalPokemon = new Text("Total Pokemon: " + pokeTable.getCount());
         totalPokemon.setTextAlignment(TextAlignment.CENTER);
         totalPokemon.setFont(new Font(20));
 
+        //text to display the amount of shiny pokemon in database
         Text shinyTotal = new Text("Total Shinies: " + pokeTable.getShinyCount());
         shinyTotal.setTextAlignment(TextAlignment.CENTER);
         shinyTotal.setFont(new Font(20));
 
+        //text to display the amount of pokemon by type in database
         Text typeTotalTitle = new Text("Total Types:");
         typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
         typeTotalTitle.setFont(new Font(20));
@@ -121,12 +127,15 @@ public class AddStatsTab extends Tab {
         typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
         typeTotalTitle.setFont(new Font(20));
 
+        //create tab stackpane
         StackPane root = new StackPane();
 
+        //setup pane background
         ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));
         background.setFitHeight(720);
         background.setFitWidth(1024);
 
+        //setup all text content in pane
         VBox textContent = new VBox();
         textContent.getChildren().addAll(title, totalPokemon, typeTotalTitle, normalTotal, fightingTotal, flyingTotal, poisonTotal, groundTotal, rockTotal,
                 bugTotal, ghostTotal, steelTotal, fireTotal, waterTotal, grassTotal, electricTotal, psychicTotal, iceTotal, dragonTotal, darkTotal, fairyTotal,
@@ -135,16 +144,19 @@ public class AddStatsTab extends Tab {
         textContent.setSpacing(10);
         textContent.setPadding(new Insets(0, 200, 0, 0));
 
+        //setup graph in pane
         HBox content = new HBox();
         content.getChildren().addAll(typeGraph);
         content.setSpacing(25);
         genTypeGraph();
 
+        //assign all content to pane
         root.getChildren().addAll(background, content, textContent);
 
         this.setContent(root);
     }
 
+    //function to generate the pie chart with pokeTable functions
     public void genTypeGraph() {
         PokeTable pokeTable = new PokeTable();
 
@@ -162,6 +174,7 @@ public class AddStatsTab extends Tab {
         typeGraph.setData(typeInfo);
     }
 
+    //function to create tab
     public static AddStatsTab getInstance() {
         if (tab == null) {
             tab = new AddStatsTab();

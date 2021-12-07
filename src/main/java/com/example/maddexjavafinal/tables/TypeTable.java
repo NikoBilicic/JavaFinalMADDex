@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class TypeTable {
 
+    //Calls arraylist of pokemon for the type table
     Database db = Database.getInstance();
     ArrayList<Poke> pokes;
 

@@ -12,6 +12,7 @@ public class Database {
     private static Database instance;
     private static Connection connection = null;
 
+    //Singletons of all tables and views
     private Database(){
         //Database Connection
         if (connection == null) {
@@ -63,6 +64,7 @@ public class Database {
         }
     }
 
+    //create tables function
     private void createTable(String tableName, String tableQuery,
                              Connection connection) throws SQLException {
         Statement createTable;
@@ -81,6 +83,7 @@ public class Database {
         }
     }
 
+    //create pokeview function
     private void createView(String viewName, String viewQuery,
                              Connection connection) throws SQLException {
         Statement createView;
@@ -99,6 +102,7 @@ public class Database {
         }
     }
 
+    //function to auto populate the types table
     private void populateType(String tableName, String tableQuery,
                               Connection connection) throws SQLException {
         Statement fillTable;
@@ -120,6 +124,7 @@ public class Database {
        }
     }
 
+    //function to insert pokemon to the database
     public static void insertPokemon(Poke pokemon) throws SQLException{
         Statement insert;
         Statement many;

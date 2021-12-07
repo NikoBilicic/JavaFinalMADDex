@@ -23,6 +23,7 @@ public class AddGenTableTab extends Tab {
 
     private AddGenTableTab() {
         this.setText("Generation Table");
+        //calls pokeTable and pokeTable functions into view
         PokeTable pokeTable = new PokeTable();
 
         StackPane root = new StackPane();
@@ -30,6 +31,7 @@ public class AddGenTableTab extends Tab {
         tableView = new TableView();
         imageView = new ImageView();
 
+        //create tableView columns
         TableColumn<ViewPoke, Number> idColumn = new TableColumn<>("Dex Number");
         idColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getId()));
 
@@ -45,22 +47,27 @@ public class AddGenTableTab extends Tab {
         TableColumn<ViewPoke, Number> genColumn = new TableColumn<>("Gen");
         genColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getGen()));
 
+        //assigns columns and pokemon to table
         tableView.getColumns().addAll(idColumn, spriteColumn, nameColumn, typeColumn, genColumn);
         tableView.getItems().addAll(pokeTable.displayPokes());
         tableView.setMaxSize(395, 384);
 
+        //setup hBox for tableview and pokeSprite
         HBox otherBox = new HBox();
         otherBox.setAlignment(Pos.CENTER);
         otherBox.setSpacing(25);
 
+        //setup hBox for pane buttons
         HBox buttonBox = new HBox();
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(25);
 
-        TextField typeInput = new TextField();
-        typeInput.setText("Please input the generation you would like to filter by");
-        typeInput.setMaxWidth(300);
+        //setups user input for generation to filter by
+        TextField generationInput = new TextField();
+        generationInput.setText("Please input the generation you would like to filter by");
+        generationInput.setMaxWidth(300);
 
+        //button to show sprite of selected row in table
         Button showSpriteButt = new Button("Show Sprite");
         showSpriteButt.setOnAction(e -> {
             ViewPoke pokemon = (ViewPoke) tableView.getSelectionModel().getSelectedItem();
@@ -73,31 +80,37 @@ public class AddGenTableTab extends Tab {
         showSpriteButt.wrapTextProperty();
         showSpriteButt.setFont(new Font(18));
 
+        //button to filter the table by the generation input by the user
         Button submitButt = new Button();
         submitButt.setText("Filter");
         submitButt.setOnAction(e -> {
-            int selectedGen = Integer.parseInt(typeInput.getText());
+            int selectedGen = Integer.parseInt(generationInput.getText());
             tableRefresh(selectedGen);
         });
         submitButt.setPrefSize(75,25);
         submitButt.setFont(new Font(18));
 
+        //assign content to respective boxes
         otherBox.getChildren().addAll(tableView, imageView);
         buttonBox.getChildren().addAll(submitButt, showSpriteButt);
 
-        vBox.getChildren().addAll(typeInput, buttonBox, otherBox);
+        //assigns hBoxes to encompassing vbox
+        vBox.getChildren().addAll(generationInput, buttonBox, otherBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(25);
 
+        //Sets up pane background
         ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));
         background.setFitHeight(720);
         background.setFitWidth(1024);
 
+        //assign all content to stackpane
         root.getChildren().addAll(background, vBox);
 
         this.setContent(root);
     }
 
+    //function to create tab
     public static AddGenTableTab getInstance() {
         if (tab == null) {
             tab = new AddGenTableTab();
@@ -105,6 +118,7 @@ public class AddGenTableTab extends Tab {
         return tab;
     }
 
+    //function to refresh tableView
     public static void tableRefresh(int gen) {
         GenTable genTable = new GenTable();
         AddGenTableTab.tableView.getItems().clear();

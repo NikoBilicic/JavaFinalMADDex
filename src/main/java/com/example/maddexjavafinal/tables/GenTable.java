@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class GenTable {
 
+    //Calls arraylist of pokemon for the generation table
     Database db = Database.getInstance();
     ArrayList<Poke> pokes;
 

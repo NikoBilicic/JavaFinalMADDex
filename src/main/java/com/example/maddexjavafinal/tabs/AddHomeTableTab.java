@@ -24,6 +24,7 @@ public class AddHomeTableTab extends Tab {
     public ImageView imageView;
     private AddHomeTableTab() {
         this.setText("Home Table");
+        //calls pokeTable and pokeTable functions into view
         PokeTable pokeTable = new PokeTable();
 
         StackPane root = new StackPane();
@@ -31,6 +32,7 @@ public class AddHomeTableTab extends Tab {
         tableView = new TableView();
         imageView = new ImageView();
 
+        //create tableView columns
         TableColumn<ViewPoke, Number> idColumn = new TableColumn<>("Dex Number");
         idColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getId()));
 
@@ -46,15 +48,18 @@ public class AddHomeTableTab extends Tab {
         TableColumn<ViewPoke, Number> genColumn = new TableColumn<>("Gen");
         genColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getGen()));
 
+        //assigns columns and pokemon to table
        tableView.getColumns().addAll(idColumn, spriteColumn, nameColumn, typeColumn, genColumn);
        tableView.getItems().addAll(pokeTable.displayPokes());
        tableView.setMaxSize(395, 384);
 
+        //setup hBoxes for pane content
         HBox edit = new HBox();
         HBox otherBox = new HBox();
         otherBox.setAlignment(Pos.CENTER);
         otherBox.setSpacing(25);
 
+        //button to show sprite of selected row in table
         Button showSpriteButt = new Button("Show Sprite");
         showSpriteButt.setOnAction(e -> {
             ViewPoke pokemon = (ViewPoke) tableView.getSelectionModel().getSelectedItem();
@@ -66,11 +71,13 @@ public class AddHomeTableTab extends Tab {
             }
         });
 
+        //Button to send the user to Add or Remove pane for CRUD operations
         Button editButt = new Button("Edit");
         editButt.setOnAction(e -> {
             HelloApplication.otherStage.setScene(new AddOrRemoveScene());
         });
 
+        //setup pane content
         edit.getChildren().addAll(editButt, showSpriteButt);
         edit.setAlignment(Pos.BOTTOM_CENTER);
         editButt.setPrefSize(75,25);
@@ -79,21 +86,22 @@ public class AddHomeTableTab extends Tab {
         showSpriteButt.setFont(new Font(18));
         edit.setPadding(new Insets(50));
         edit.setSpacing(25);
-
         otherBox.getChildren().addAll(tableView, imageView);
-
         vBox.getChildren().addAll(otherBox, edit);
         vBox.setAlignment(Pos.CENTER);
 
+        //setup pane background
         ImageView background = new ImageView(new Image("file:src/imgResources/background.png"));
         background.setFitHeight(720);
         background.setFitWidth(1024);
 
+        //assign all content to pane
         root.getChildren().addAll(background, vBox);
 
         this.setContent(root);
     }
 
+    //function to create tab
     public static AddHomeTableTab getInstance() {
         if (tab == null) {
             tab = new AddHomeTableTab();
@@ -101,6 +109,7 @@ public class AddHomeTableTab extends Tab {
         return tab;
     }
 
+    //function to refresh tableView
     public static void tableRefresh() {
         PokeTable pokeTable = new PokeTable();
         AddHomeTableTab.tableView.getItems().clear();
