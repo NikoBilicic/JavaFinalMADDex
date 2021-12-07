@@ -40,32 +40,20 @@ public class GsonFunc {
 
     //function to get pokemon sprite
     public static String getPokeSprite(JsonObject object, String gender, String shiny) {
-        String pokeSprite = "";
+        String sprite = "";
         //checks input gender and shiny to grab proper sprite
         JsonObject allSprites = object.getAsJsonObject("sprites");
         if (gender == "M" && shiny == "N") {
-            String sprite = String.valueOf(allSprites.get("front_default"));
-            System.out.println(sprite);
-            return String.valueOf(sprite).replaceAll("\"", "");
+            sprite = String.valueOf(allSprites.get("front_default"));
         } else if (gender == "M" && shiny == "Y") {
-            String sprite = String.valueOf(allSprites.get("front_shiny"));
-            System.out.println(sprite);
-            return String.valueOf(sprite).replaceAll("\"", "");
+            sprite = String.valueOf(allSprites.get("front_shiny"));
         } else if (gender == "F" && shiny == "N") {
-            String sprite = String.valueOf(allSprites.get("front_female"));
-            if (sprite == null) {
-                sprite = String.valueOf(allSprites.get("front_default"));
-            }
-                return String.valueOf(sprite).replaceAll("\"", "");
+            sprite = String.valueOf(allSprites.get("front_female"));
         } else if (gender == "F" && shiny == "Y") {
-            String sprite = String.valueOf(allSprites.get("front_shiny_female"));
-            if (sprite == null) {
-                sprite = String.valueOf(allSprites.get("front_shiny"));
-            }
-            System.out.println(sprite);
-                return String.valueOf(sprite).replaceAll("\"", "");
+            sprite = String.valueOf(allSprites.get("front_shiny_female"));
         }
-        return pokeSprite;
+
+        return String.valueOf(sprite).replaceAll("\"", "");
     }
 
     //Function to get pokemon name
@@ -106,7 +94,6 @@ public class GsonFunc {
                     typesArray.add(type2int);
                 }
             }
-            System.out.println(typesArray);
             return typesArray;
         } else {
             JsonObject type1 = (JsonObject) types.get(0);
@@ -114,7 +101,6 @@ public class GsonFunc {
             String pokeTypes = String.valueOf(type1Type.get("name"));
             for (int i = 0; i <= 17; i++) {
                 if (pokeTypes.replaceAll("\"", "").equalsIgnoreCase(typing[i])) {
-                    System.out.println(typing[i]);
                     typesArray.add(i + 1);
                 }
             }

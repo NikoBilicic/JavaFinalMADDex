@@ -5,6 +5,7 @@ import com.example.maddexjavafinal.scenes.ConfirmationScene;
 import com.example.maddexjavafinal.scenes.HomeScene;
 import com.example.maddexjavafinal.tables.PokeTable;
 import com.example.maddexjavafinal.tabs.AddHomeTableTab;
+import com.example.maddexjavafinal.tabs.AddStatsTab;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -70,19 +71,47 @@ public class InsertFormPane extends StackPane {
         //button to grab all values and perform insert call appropriately
         Button submitButt = new Button();
         submitButt.setOnAction(e -> {
-            if (gender.getSelectedToggle() == male) {
-                pokeGender = "M";
+            if (newPoke.getText().equalsIgnoreCase("Input Pokemon Name")) {
+                HelloApplication.otherStage.setScene(new HomeScene());
             } else {
-                pokeGender = "F";
+                if (gender.getSelectedToggle() == male) {
+                    pokeGender = "M";
+                } else {
+                    pokeGender = "F";
+                }
+                if (shiny.isSelected()) {
+                    pokeShiny = "Y";
+                } else {
+                    pokeShiny = "N";
+                }
+                pokeTable.createPoke(newPoke.getText(), pokeGender, pokeShiny);
+                //refreshes home table
+                AddHomeTableTab.tableRefresh();
+                //Refresh contents of stats tab
+                AddStatsTab.getInstance().genTypeGraph();
+                AddStatsTab.totalPokemon.setText("Total Pokemon: " + pokeTable.getCount());
+                AddStatsTab.shinyTotal.setText("Total Shinies: " + pokeTable.getShinyCount());
+                AddStatsTab.normalTotal.setText("Normal: " + pokeTable.getTypeCount("normal"));
+                AddStatsTab.fightingTotal.setText("Fighting: " + pokeTable.getTypeCount("fighting"));
+                AddStatsTab.flyingTotal.setText("Flying: " + pokeTable.getTypeCount("flying"));
+                AddStatsTab.poisonTotal.setText("Poison: " + pokeTable.getTypeCount("poison"));
+                AddStatsTab.groundTotal.setText("Ground: " + pokeTable.getTypeCount("ground"));
+                AddStatsTab.rockTotal.setText("Rock: " + pokeTable.getTypeCount("rock"));
+                AddStatsTab.bugTotal.setText("Bug: " + pokeTable.getTypeCount("bug"));
+                AddStatsTab.ghostTotal.setText("Ghost: " + pokeTable.getTypeCount("ghost"));
+                AddStatsTab.steelTotal.setText("Steel: " + pokeTable.getTypeCount("steel"));
+                AddStatsTab.fireTotal.setText("Fire: " + pokeTable.getTypeCount("fire"));
+                AddStatsTab.waterTotal.setText("Water: " + pokeTable.getTypeCount("water"));
+                AddStatsTab.grassTotal.setText("Grass: " + pokeTable.getTypeCount("grass"));
+                AddStatsTab.electricTotal.setText("Electric: " + pokeTable.getTypeCount("electric"));
+                AddStatsTab.psychicTotal.setText("Psychic: " + pokeTable.getTypeCount("psychic"));
+                AddStatsTab.iceTotal.setText("Ice: " + pokeTable.getTypeCount("ice"));
+                AddStatsTab.dragonTotal.setText("Dragon: " + pokeTable.getTypeCount("dragon"));
+                AddStatsTab.darkTotal.setText("Dark: " + pokeTable.getTypeCount("dark"));
+                AddStatsTab.fairyTotal.setText("Fairy: " + pokeTable.getTypeCount("fairy"));
+                //send user to home tab
+                HelloApplication.otherStage.setScene(new HomeScene());
             }
-            if (shiny.isSelected()) {
-                pokeShiny = "Y";
-            } else {
-                pokeShiny = "N";
-            }
-            pokeTable.createPoke(newPoke.getText(), pokeGender, pokeShiny);
-            AddHomeTableTab.tableRefresh();
-            HelloApplication.otherStage.setScene(new HomeScene());
         });
         //setup for submitButton
         submitButt.setText("Submit");

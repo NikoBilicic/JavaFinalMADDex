@@ -23,8 +23,31 @@ import static com.example.maddexjavafinal.database.DBTableVals.typing;
 
 public class AddStatsTab extends Tab {
 
+    //set to public so content is accessible application wide
     private static  AddStatsTab tab;
     public PieChart typeGraph;
+    public static Text totalPokemon;
+    public static Text shinyTotal;
+    public static Text normalTotal;
+    public static Text fightingTotal;
+    public static Text flyingTotal;
+    public static Text poisonTotal;
+    public static Text groundTotal;
+    public static Text rockTotal;
+    public static Text bugTotal;
+    public static Text ghostTotal;
+    public static Text steelTotal;
+    public static Text fireTotal;
+    public static Text waterTotal;
+    public static Text grassTotal;
+    public static Text electricTotal;
+    public static Text psychicTotal;
+    public static Text iceTotal;
+    public static Text dragonTotal;
+    public static Text darkTotal;
+    public static Text fairyTotal;
+
+
 
     private AddStatsTab() {
         this.setText("Statistics");
@@ -41,12 +64,12 @@ public class AddStatsTab extends Tab {
         title.setFont(new Font(25));
 
         //text to display the amount of pokemon in database
-        Text totalPokemon = new Text("Total Pokemon: " + pokeTable.getCount());
+        totalPokemon = new Text("Total Pokemon: " + pokeTable.getCount());
         totalPokemon.setTextAlignment(TextAlignment.CENTER);
         totalPokemon.setFont(new Font(20));
 
         //text to display the amount of shiny pokemon in database
-        Text shinyTotal = new Text("Total Shinies: " + pokeTable.getShinyCount());
+        shinyTotal = new Text("Total Shinies: " + pokeTable.getShinyCount());
         shinyTotal.setTextAlignment(TextAlignment.CENTER);
         shinyTotal.setFont(new Font(20));
 
@@ -55,77 +78,77 @@ public class AddStatsTab extends Tab {
         typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
         typeTotalTitle.setFont(new Font(20));
 
-        Text normalTotal = new Text("Normal: " + pokeTable.getTypeCount("normal"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        normalTotal = new Text("Normal: " + pokeTable.getTypeCount("normal"));
+        normalTotal.setTextAlignment(TextAlignment.CENTER);
+        normalTotal.setFont(new Font(15));
 
-        Text fightingTotal = new Text("Fighting: " + pokeTable.getTypeCount("fighting"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        fightingTotal = new Text("Fighting: " + pokeTable.getTypeCount("fighting"));
+        fightingTotal.setTextAlignment(TextAlignment.CENTER);
+        fightingTotal.setFont(new Font(15));
 
-        Text flyingTotal = new Text("Flying: " + pokeTable.getTypeCount("flying"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        flyingTotal = new Text("Flying: " + pokeTable.getTypeCount("flying"));
+        flyingTotal.setTextAlignment(TextAlignment.CENTER);
+        flyingTotal.setFont(new Font(15));
 
-        Text poisonTotal = new Text("Poison: " + pokeTable.getTypeCount("poison"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        poisonTotal = new Text("Poison: " + pokeTable.getTypeCount("poison"));
+        poisonTotal.setTextAlignment(TextAlignment.CENTER);
+        poisonTotal.setFont(new Font(15));
 
-        Text groundTotal = new Text("Ground: " + pokeTable.getTypeCount("ground"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        groundTotal = new Text("Ground: " + pokeTable.getTypeCount("ground"));
+        groundTotal.setTextAlignment(TextAlignment.CENTER);
+        groundTotal.setFont(new Font(15));
 
-        Text rockTotal = new Text("Rock: " + pokeTable.getTypeCount("rock"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        rockTotal = new Text("Rock: " + pokeTable.getTypeCount("rock"));
+        rockTotal.setTextAlignment(TextAlignment.CENTER);
+        rockTotal.setFont(new Font(15));
 
-        Text bugTotal = new Text("Bug: " + pokeTable.getTypeCount("bug"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        bugTotal = new Text("Bug: " + pokeTable.getTypeCount("bug"));
+        bugTotal.setTextAlignment(TextAlignment.CENTER);
+        bugTotal.setFont(new Font(15));
 
-        Text ghostTotal = new Text("Ghost: " + pokeTable.getTypeCount("ghost"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        ghostTotal = new Text("Ghost: " + pokeTable.getTypeCount("ghost"));
+        ghostTotal.setTextAlignment(TextAlignment.CENTER);
+        ghostTotal.setFont(new Font(15));
 
-        Text steelTotal = new Text("Steel: " + pokeTable.getTypeCount("steel"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        steelTotal = new Text("Steel: " + pokeTable.getTypeCount("steel"));
+        steelTotal.setTextAlignment(TextAlignment.CENTER);
+        steelTotal.setFont(new Font(15));
 
-        Text fireTotal = new Text("Fire: " + pokeTable.getTypeCount("fire"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        fireTotal = new Text("Fire: " + pokeTable.getTypeCount("fire"));
+        fireTotal.setTextAlignment(TextAlignment.CENTER);
+        fireTotal.setFont(new Font(15));
 
-        Text waterTotal = new Text("Water: " + pokeTable.getTypeCount("water"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        waterTotal = new Text("Water: " + pokeTable.getTypeCount("water"));
+        waterTotal.setTextAlignment(TextAlignment.CENTER);
+        waterTotal.setFont(new Font(15));
 
-        Text grassTotal = new Text("Grass: " + pokeTable.getTypeCount("grass"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        grassTotal = new Text("Grass: " + pokeTable.getTypeCount("grass"));
+        grassTotal.setTextAlignment(TextAlignment.CENTER);
+        grassTotal.setFont(new Font(15));
 
-        Text electricTotal = new Text("Electric: " + pokeTable.getTypeCount("electric"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        electricTotal = new Text("Electric: " + pokeTable.getTypeCount("electric"));
+        electricTotal.setTextAlignment(TextAlignment.CENTER);
+        electricTotal.setFont(new Font(15));
 
-        Text psychicTotal = new Text("Psychic: " + pokeTable.getTypeCount("psychic"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        psychicTotal = new Text("Psychic: " + pokeTable.getTypeCount("psychic"));
+        psychicTotal.setTextAlignment(TextAlignment.CENTER);
+        psychicTotal.setFont(new Font(15));
 
-        Text iceTotal = new Text("Ice: " + pokeTable.getTypeCount("ice"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        iceTotal = new Text("Ice: " + pokeTable.getTypeCount("ice"));
+        iceTotal.setTextAlignment(TextAlignment.CENTER);
+        iceTotal.setFont(new Font(15));
 
-        Text dragonTotal = new Text("Dragon: " + pokeTable.getTypeCount("dragon"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        dragonTotal = new Text("Dragon: " + pokeTable.getTypeCount("dragon"));
+        dragonTotal.setTextAlignment(TextAlignment.CENTER);
+        dragonTotal.setFont(new Font(15));
 
-        Text darkTotal = new Text("Dark: " + pokeTable.getTypeCount("dark"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        darkTotal = new Text("Dark: " + pokeTable.getTypeCount("dark"));
+        darkTotal.setTextAlignment(TextAlignment.CENTER);
+        darkTotal.setFont(new Font(15));
 
-        Text fairyTotal = new Text("Fairy: " + pokeTable.getTypeCount("fairy"));
-        typeTotalTitle.setTextAlignment(TextAlignment.CENTER);
-        typeTotalTitle.setFont(new Font(20));
+        fairyTotal = new Text("Fairy: " + pokeTable.getTypeCount("fairy"));
+        fairyTotal.setTextAlignment(TextAlignment.CENTER);
+        fairyTotal.setFont(new Font(15));
 
         //create tab stackpane
         StackPane root = new StackPane();
@@ -148,11 +171,11 @@ public class AddStatsTab extends Tab {
         HBox content = new HBox();
         content.getChildren().addAll(typeGraph);
         content.setSpacing(25);
-        genTypeGraph();
 
         //assign all content to pane
         root.getChildren().addAll(background, content, textContent);
 
+        genTypeGraph();
         this.setContent(root);
     }
 
