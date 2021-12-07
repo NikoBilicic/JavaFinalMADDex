@@ -34,8 +34,58 @@ public class PokeTable implements PokeDAO {
         Statement insert;
         Statement many;
         Statement many2;
-        if (pokeName == "deoxys") {
+        if (pokeName.equalsIgnoreCase("deoxys")) {
             pokeName = "deoxys-normal";
+        } else if (pokeName.equalsIgnoreCase("giratina")) {
+            pokeName = "giratina-altered";
+        } else if (pokeName.equalsIgnoreCase("shaymin")) {
+            pokeName = "shaymin-land";
+        } else if (pokeName.equalsIgnoreCase("darmanitan")) {
+            pokeName = "darmanitan-standard";
+        } else if (pokeName.equalsIgnoreCase("tornadus")) {
+            pokeName = "tornadus-incarnate";
+        } else if (pokeName.equalsIgnoreCase("thundurus")) {
+            pokeName = "thundurus-incarnate";
+        } else if (pokeName.equalsIgnoreCase("landorus")) {
+            pokeName = "landorus-incarnate";
+        } else if (pokeName.equalsIgnoreCase("keldeo")) {
+            pokeName = "keldeo-ordinary";
+        } else if (pokeName.equalsIgnoreCase("meloetta")) {
+            pokeName = "meloetta-aria";
+        } else if (pokeName.equalsIgnoreCase("aegislash")) {
+            pokeName = "aegislash-shield";
+        } else if (pokeName.equalsIgnoreCase("pumpkaboo")) {
+            pokeName = "pumpkaboo-average";
+        } else if (pokeName.equalsIgnoreCase("gourgeist")) {
+            pokeName = "gourgeist-average";
+        } else if (pokeName.equalsIgnoreCase("wishiwashi")) {
+            pokeName = "wishiwashi-solo";
+        } else if (pokeName.equalsIgnoreCase("minior")) {
+            pokeName = "minior-red-meteor";
+        } else if (pokeName.equalsIgnoreCase("mimikyu")) {
+            pokeName = "mimikyu-disguise";
+        } else if (pokeName.equalsIgnoreCase("eiscue")) {
+            pokeName = "eiscue-ice";
+        } else if (pokeName.equalsIgnoreCase("zacian")) {
+            pokeName = "zacian-hero";
+        } else if (pokeName.equalsIgnoreCase("zamazenta")) {
+            pokeName = "zamazenta-hero";
+        } else if (pokeName.equalsIgnoreCase("nidoran") && gender.equalsIgnoreCase("m")) {
+            pokeName = "nidoran-m";
+        } else if (pokeName.equalsIgnoreCase("nidoran") && gender.equalsIgnoreCase("f")) {
+            pokeName = "nidoran-f";
+        } else if (pokeName.equalsIgnoreCase("wormadam")) {
+            pokeName = "wormadam-plant";
+        } else if (pokeName.equalsIgnoreCase("basculin")) {
+            pokeName = "basculin-red-striped";
+        } else if (pokeName.equalsIgnoreCase("oricorio")) {
+            pokeName = "oricorio-baile";
+        } else if (pokeName.equalsIgnoreCase("lycanroc")) {
+            pokeName = "lycanroc-midnight";
+        } else if (pokeName.equalsIgnoreCase("toxtricity")) {
+            pokeName = "toxtricity-amped";
+        } else if (pokeName.equalsIgnoreCase("urshifue")) {
+            pokeName = "urshifue-single-strike";
         }
 
         HttpURLConnection connection = null;
@@ -206,10 +256,10 @@ public class PokeTable implements PokeDAO {
         return count;
     }
 
-    public int getGenCount(int gen) {
+    public int getShinyCount() {
         int count = 0;
         try {
-            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT COUNT(*) FROM pokeview WHERE generation = " + gen);
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT COUNT(*) FROM pokeview WHERE sprite LIKE '%shiny%';");
             ResultSet rs = getCount.executeQuery();
             rs.next();
             count = rs.getInt(1);
@@ -218,4 +268,18 @@ public class PokeTable implements PokeDAO {
         }
         return count;
     }
+
+    public int getCount() {
+        int count = 0;
+        try {
+            PreparedStatement getCount = db.getConnection().prepareStatement("SELECT COUNT(*) FROM pokeview;");
+            ResultSet rs = getCount.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
 }
