@@ -20,7 +20,6 @@ until all the required data is provided.
 |     Name     |   Account   |        Email        |
 |--------------|-------------|---------------------|
 | Niko Bilicic | NikoBilicic | <w0528921@myscc.ca> |
-| Josh Iovino  | JoshIovino  | <w0655583@myscc.ca> |
 
 ***
 
