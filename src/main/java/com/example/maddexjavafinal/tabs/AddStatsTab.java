@@ -47,8 +47,6 @@ public class AddStatsTab extends Tab {
     public static Text darkTotal;
     public static Text fairyTotal;
 
-
-
     private AddStatsTab() {
         this.setText("Statistics");
         //call pokeTable and pokeTable functions into view

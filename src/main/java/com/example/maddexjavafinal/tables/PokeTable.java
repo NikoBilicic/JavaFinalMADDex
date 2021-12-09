@@ -33,6 +33,7 @@ public class PokeTable implements PokeDAO {
     //function to insert pokemon into the database
     @Override
     public void createPoke(String pokeName, String gender, String shiny) {
+        Poke poke;
         Statement insert;
         Statement many;
         Statement many2;
@@ -77,6 +78,7 @@ public class PokeTable implements PokeDAO {
             pokeName = "nidoran-m";
         } else if (pokeName.equalsIgnoreCase("nidoran") && gender.equalsIgnoreCase("f")) {
             pokeName = "nidoran-f";
+            gender = "M";
         } else if (pokeName.equalsIgnoreCase("wormadam")) {
             pokeName = "wormadam-plant";
         } else if (pokeName.equalsIgnoreCase("basculin")) {
@@ -106,7 +108,11 @@ public class PokeTable implements PokeDAO {
                 JsonElement element = JsonParser.parseReader(reader);
                 JsonObject object = element.getAsJsonObject();
 
-                Poke poke = new Poke(getDexNum(object), getPokeSprite(object, gender, shiny), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
+                if (getPokeSprite(object, gender, shiny).equals("null")) {
+                    poke = new Poke(getDexNum(object), getPokeSprite(object, "M", shiny), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
+                } else {
+                    poke = new Poke(getDexNum(object), getPokeSprite(object, gender, shiny), getPokeName(object), getPokeTyping(object), getPokeGen(getDexNum(object)));
+                }
 
                 try {
                     //insert statements for POKEMON table and POKEMON_TYPE table depending on whether the pokemon is mono or dual type
